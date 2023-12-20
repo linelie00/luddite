@@ -10,8 +10,20 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
     return <div>Error: {error}</div>;
   }
 
+  // Check if searchResult and channel are defined
+  const channel = searchResult?.channel;
+  if (!channel) {
+    return <div>결과가 없습니다.</div>;
+  }
+
+  // Check if item is defined in the channel
+  const items = channel?.item;
+  if (!items || !Array.isArray(items)) {
+    return <div>결과가 없습니다.</div>;
+  }
+
   //  문자가 있는 결과를 필터링
-  const filteredResults = searchResult?.channel.item.filter(item => !item.word.includes('') && !item.word.includes('^'));
+  const filteredResults = items.filter(item => !item.word?.includes('') && !item.word?.includes('^'));
 
   // 단어가 같은 경우에 처음 나온 단어만 보이도록 필터링
   const uniqueResults = filteredResults.reduce((uniqueResults, item) => {
