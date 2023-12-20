@@ -1,0 +1,142 @@
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #eeeeee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #864971;
+}
+
+.App-link {
+  color: blue;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+#head {
+  width: 99%;
+  height: 250px;
+  background-color: #ffffff;
+  margin: 5px;
+  display: flex; /* Flexbox 사용 */
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  flex-direction: column; /* 요소들을 세로로 나열 */
+  /*border: 5px solid #eeeeee; */
+}
+
+#head_1,
+#head_2,
+#mid {
+  margin: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#head_1 {
+  background-color: #888888;
+  width: 98%;
+  height: 40%;
+}
+
+#head_2 {
+  background-color: #eeeeee;
+  width: 98%;
+  height: 55%;
+  display: flex; /* Flexbox 사용 */
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  flex-direction: column; /* 요소들을 세로로 나열 */
+  
+}
+
+#head_2_1 {
+  background-color: #ffffff;
+  width: 98%;
+  height: 45%;
+  overflow: hidden;
+  display: flex;
+}
+#head_2_2 {
+  background-color: #ffffff;
+  width: 98%;
+  height: 30%;
+  overflow: hidden;
+}
+
+#mid {
+  width: 90%;
+  height: 500px;
+  background-color: #eeeeee;
+  overflow-y: auto;
+}
+
+
+#Divider {
+border: none;
+margin-top: 12px;
+width: 98%;
+height: 3px;
+background-color: #864971;
+}
+
+#PillTextBoxContainer {
+  margin-top: 10px;
+  left: 17%;
+  cursor: pointer;
+  position: relative;
+  width: 470px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #864971;
+  display: flex;
+  align-items: center;
+  padding: 0 55px;
+}
+
+#PillTextBoxInput {
+  border: none;
+  outline: none;
+  flex: 1;
+  background: transparent;
+  font-size: 16px;
+  margin-left: 4px;
+  color: #e9e9e9;
+}
+
+#SearchIcon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
