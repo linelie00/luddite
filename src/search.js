@@ -1,14 +1,14 @@
 // PillTextBox.js
 import React from 'react';
 import styled from 'styled-components';
-import searchIcon from './search.png';
+import searchIcon from './search.svg';
 
 const PillTextBoxContainer = styled.div`
-  margin-top: 10px;
-  left: 17%;
+  margin-top: 6px;
+  left: 2%;
   cursor: pointer;
   position: relative;
-  width: 470px;
+  width: 60%;
   height: 50px;
   border-radius: 25px;
   background-color: #864971;
@@ -22,9 +22,13 @@ const PillTextBoxInput = styled.input`
   outline: none;
   flex: 1;
   background: transparent;
-  font-size: 16px;
-  margin-left: 4px;
+  font-size: 18px; /* 수정된 부분: 폰트 크기를 18px로 수정 */
+  font-weight: 600;
+  margin-left: 3px;
   color: #e9e9e9;
+  &::placeholder { /* 수정된 부분: placeholder 스타일 추가 */
+    color: #B89DAF;
+  }
 `;
 
 const SearchIcon = styled.img`
@@ -48,7 +52,7 @@ const PillTextBox = ({ value, onChange, onEnter }) => {
     <PillTextBoxContainer>
       <PillTextBoxInput
         type="text"
-        placeholder=""
+        placeholder="검색어를 입력하세요"
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}
