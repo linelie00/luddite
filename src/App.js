@@ -7,10 +7,10 @@ import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
 import {
   Head,
-  Head1,
-  Head2,
-  Head2_1,
-  Head2_2,
+  HeadTop,
+  HeadBottom,
+  HeadBottom1,
+  HeadBottom2,
   Divider,
   Mid,
 } from './StyledComponents';  // StyledComponents.js에서 정의한 styled-components 가져오기
@@ -29,19 +29,19 @@ const App = () => {
   return (
     <div>
       <Head>
-        <Head1></Head1>
-        <Head2>
-          <Head2_1>
+        <HeadTop></HeadTop>
+        <HeadBottom>
+          <HeadBottom1>
             <PillTextBox
               value={searchValue}
               onChange={handleChange}
               onEnter={handleKeyDown}
             />
             <Toggle />
-          </Head2_1>
+          </HeadBottom1>
           <Divider></Divider>
-          <Head2_2></Head2_2>
-        </Head2>
+          <HeadBottom2></HeadBottom2>
+        </HeadBottom>
       </Head>
       <Mid>
         <b>{searchValue}</b>

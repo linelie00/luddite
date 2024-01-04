@@ -12,7 +12,7 @@ export const Head = styled.div`
   flex-direction: column;
 `;
 
-export const Head1 = styled.div`
+export const HeadTop = styled.div`
   margin: 2px;
   margin-left: auto;
   margin-right: auto;
@@ -21,7 +21,7 @@ export const Head1 = styled.div`
   height: 40%;
 `;
 
-export const Head2 = styled.div`
+export const HeadBottom = styled.div`
   margin: 2px;
   margin-left: auto;
   margin-right: auto;
@@ -34,7 +34,7 @@ export const Head2 = styled.div`
   flex-direction: column;
 `;
 
-export const Head2_1 = styled.div`
+export const HeadBottom1 = styled.div`
   background-color: #ffffff;
   width: 98%;
   height: 45%;
@@ -42,7 +42,7 @@ export const Head2_1 = styled.div`
   display: flex;
 `;
 
-export const Head2_2 = styled.div`
+export const HeadBottom2 = styled.div`
   background-color: #ffffff;
   width: 98%;
   height: 33%;
