@@ -45,8 +45,11 @@ export const HeadBottom1 = styled.div`
 export const HeadBottom2 = styled.div`
   background-color: #ffffff;
   width: 98%;
-  height: 33%;
+  height: 30%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative
 `;
 
 export const Mid = styled.div`

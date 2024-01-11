@@ -1,8 +1,10 @@
 // App.js
-import React from 'react';
+import React, { useState } from 'react';
 import Toggle from './toggle.js';
 import PillTextBox from './search.js';
-//import PillTextBoxMod from './search_first.js';
+import MeatballComponent from './MeatballComponent'; // 수정: MeatballComponent import 추가
+import MeatballButton from './MeatballButton'; // 수정: MeatballButton import 추가
+import MeatballDiv from './MeatballDiv'; // 수정: MeatballDiv import 추가
 import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
 import {
@@ -13,7 +15,7 @@ import {
   HeadBottom2,
   Divider,
   Mid,
-} from './StyledComponents';  // StyledComponents.js에서 정의한 styled-components 가져오기
+} from './StyledComponents';  
 
 const App = () => {
   const {
@@ -25,6 +27,12 @@ const App = () => {
     handleSearchClick,
     handleKeyDown,
   } = useSearch();
+
+  const [divVisible, setDivVisible] = useState(false);
+
+  const toggleDiv = () => {
+    setDivVisible(!divVisible);
+  };
 
   return (
     <div>
@@ -40,9 +48,12 @@ const App = () => {
             <Toggle />
           </HeadBottom1>
           <Divider></Divider>
-          <HeadBottom2></HeadBottom2>
+          <HeadBottom2>
+            <MeatballButton onClick={toggleDiv} isRotated={divVisible} />
+          </HeadBottom2>
         </HeadBottom>
       </Head>
+      <MeatballDiv isVisible={divVisible} />
       <Mid>
         <b>{searchValue}</b>
         <SearchResultDisplay

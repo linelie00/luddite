@@ -20,8 +20,8 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
       return [];
     }
 
-    //  문자가 있는 결과를 필터링
-    const filteredResults = items.filter(item => !item.word?.includes('') && !item.word?.includes('^') && !item.word?.includes(''));
+    // 잘못된 문자가 있는 결과를 필터링
+    const filteredResults = items.filter(item => !item.word?.includes('') && !item.word?.includes('^') && !item.word?.includes('') && !item.word?.includes(''));
 
     // 단어가 같은 경우에 처음 나온 단어만 보이도록 필터링
     const uniqueResults = filteredResults.reduce((uniqueResults, item) => {
