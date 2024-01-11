@@ -5,26 +5,27 @@ import styled from 'styled-components';
 
 const DivContainer = styled.div`
     position: absolute;
-    width: 97%;
+    width: 95%;
     left: 50%;
     margin: -60px auto; /* 수정: 가로로 중앙 정렬, 오른쪽은 auto로 유지 */
-    margin-left: -3px; /* 수정: 왼쪽으로 5px 이동 */
+    margin-left: -3px; /* 수정: 왼쪽으로 3px 이동 */
     transform: translateX(-50%);
     z-index: 15; /* 새로운 Div를 상위로 올림 */
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
 `;
 
 const CreatedDiv = styled.div`
     display: ${props => props.visible ? 'block' : 'none'};
-    width: 98%;
+    width: 95%;
     max-height: 200px;
     overflow-y: auto;
-    background-color: #ffffff;
-    margin: 0 auto;
+    margin: 0; /* 수정: CreatedDiv의 margin을 0으로 설정 */
     text-align: left;
     padding: 10px;
     box-sizing: border-box;
     white-space: pre-wrap;
-    box-shadow: 1px 3px 3px #bcbcbc;
+    margin-right: auto; /* 수정: 오른쪽 마진을 auto로 설정하여 왼쪽 정렬 */
 `;
 
 
