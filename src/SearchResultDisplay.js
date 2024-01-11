@@ -21,7 +21,7 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
     }
 
     //  문자가 있는 결과를 필터링
-    const filteredResults = items.filter(item => !item.word?.includes('') && !item.word?.includes('^'));
+    const filteredResults = items.filter(item => !item.word?.includes('') && !item.word?.includes('^') && !item.word?.includes(''));
 
     // 단어가 같은 경우에 처음 나온 단어만 보이도록 필터링
     const uniqueResults = filteredResults.reduce((uniqueResults, item) => {
@@ -44,9 +44,9 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
     return textContent;
   };
 
-  // 정규식을 사용하여 한글 음절이 아닌 문자를 필터링하는 함수
+ // 정규식을 사용하여 한글 음절이 아닌 문자를 필터링하는 함수
   const filterNonHangulMeanings = (sense) => {
-    return sense.filter(meaning => /[가-힣]{2,}/.test(meaning.definition));
+    return sense.filter(meaning => /[가-힣]{2,}/.test(removeHtmlTagsAndString(meaning.definition, '&lt;/FL&gt;')));
   };
 
   // Render result item
@@ -66,7 +66,7 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
             <a href={meaning.link} target="_blank" rel="noopener noreferrer">
               더 알아보기
             </a>
-            <hr />
+            
           </div>
         ))}
       </div>

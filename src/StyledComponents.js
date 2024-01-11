@@ -1,73 +1,73 @@
+// StyledComponents.js
+import styled from 'styled-components';
 
-
-#head {
+export const Head = styled.div`
   width: 99%;
   height: 250px;
   background-color: #ffffff;
   margin: 5px;
-  display: flex; /* Flexbox 사용 */
-  justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  flex-direction: column; /* 요소들을 세로로 나열 */
-  /*border: 5px solid #eeeeee; */
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 
-#head_1,
-#head_2,
-#mid {
+export const HeadTop = styled.div`
   margin: 2px;
   margin-left: auto;
   margin-right: auto;
-}
-
-#head_1 {
   background-color: #888888;
   width: 98%;
   height: 40%;
-}
+`;
 
-#head_2 {
+export const HeadBottom = styled.div`
+  margin: 2px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #eeeeee;
   width: 98%;
   height: 55%;
-  display: flex; /* Flexbox 사용 */
-  justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  flex-direction: column; /* 요소들을 세로로 나열 */
-  
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 
-#head_2_1 {
+export const HeadBottom1 = styled.div`
   background-color: #ffffff;
   width: 98%;
   height: 45%;
   overflow: hidden;
   display: flex;
-}
-#head_2_2 {
+`;
+
+export const HeadBottom2 = styled.div`
   background-color: #ffffff;
   width: 98%;
-  height: 30%;
+  height: 33%;
   overflow: hidden;
-}
+`;
 
-#mid {
+export const Mid = styled.div`
   width: 90%;
   height: 500px;
   background-color: #eeeeee;
   overflow-y: auto;
-}
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
+export const Divider = styled.div`
+  border: none;
+  margin-top: 12px;
+  width: 98%;
+  height: 3px;
+  background-color: #864971;
+`;
 
-#Divider {
-border: none;
-margin-top: 12px;
-width: 98%;
-height: 3px;
-background-color: #864971;
-}
-
-#PillTextBoxContainer {
+export const PillTextBoxContainer = styled.div`
   margin-top: 10px;
   left: 17%;
   cursor: pointer;
@@ -79,9 +79,9 @@ background-color: #864971;
   display: flex;
   align-items: center;
   padding: 0 55px;
-}
+`;
 
-#PillTextBoxInput {
+export const PillTextBoxInput = styled.input`
   border: none;
   outline: none;
   flex: 1;
@@ -89,9 +89,9 @@ background-color: #864971;
   font-size: 16px;
   margin-left: 4px;
   color: #e9e9e9;
-}
+`;
 
-#SearchIcon {
+export const SearchIcon = styled.div`
   position: absolute;
   top: 50%;
   left: 15px;
@@ -99,4 +99,4 @@ background-color: #864971;
   width: 22px;
   height: 22px;
   cursor: pointer;
-}
+`;

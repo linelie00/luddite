@@ -1,16 +1,21 @@
 // App.js
-
 import React from 'react';
-import './App.css';
 import Toggle from './toggle.js';
 import PillTextBox from './search.js';
-import PillTextBoxMod from './search_first.js';
-//import useSearch from './searchHook';
+//import PillTextBoxMod from './search_first.js';
 import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
+import {
+  Head,
+  HeadTop,
+  HeadBottom,
+  HeadBottom1,
+  HeadBottom2,
+  Divider,
+  Mid,
+} from './StyledComponents';  // StyledComponents.js에서 정의한 styled-components 가져오기
 
-
-function App() {
+const App = () => {
   const {
     searchValue,
     searchResult,
@@ -21,35 +26,33 @@ function App() {
     handleKeyDown,
   } = useSearch();
 
-
   return (
     <div>
-      <div id="head">
-        <div id="head_1"></div>
-        <div id="head_2">
-          <div id="head_2_1">
-            <PillTextBoxMod />
-            <Toggle />
+      <Head>
+        <HeadTop></HeadTop>
+        <HeadBottom>
+          <HeadBottom1>
             <PillTextBox
               value={searchValue}
               onChange={handleChange}
               onEnter={handleKeyDown}
             />
-          </div>
-          <div id="Divider"></div>
-          <div id="head_2_2"></div>
-        </div>
-      </div>
-      <div id="mid">
+            <Toggle />
+          </HeadBottom1>
+          <Divider></Divider>
+          <HeadBottom2></HeadBottom2>
+        </HeadBottom>
+      </Head>
+      <Mid>
         <b>{searchValue}</b>
         <SearchResultDisplay
           searchResult={searchResult}
           loading={loading}
           error={error}
         />
-      </div>
+      </Mid>
     </div>
   );
-}
+};
 
 export default App;
