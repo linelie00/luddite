@@ -2,9 +2,8 @@
 import React, { useState } from 'react';
 import Toggle from './toggle.js';
 import PillTextBox from './search.js';
-import MeatballComponent from './MeatballComponent'; // 수정: MeatballComponent import 추가
-import MeatballButton from './MeatballButton'; // 수정: MeatballButton import 추가
-import MeatballDiv from './MeatballDiv'; // 수정: MeatballDiv import 추가
+import MeatballButton from './MeatballButton';
+import MeatballDiv from './MeatballDiv';
 import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
 import {

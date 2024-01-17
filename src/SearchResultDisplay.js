@@ -1,7 +1,21 @@
-// SearchResultDisplay.js
-import React from 'react';
+import React, { useState } from 'react';
 
 const SearchResultDisplay = ({ searchResult, loading, error }) => {
+  const [bookmarks, setBookmarks] = useState([]);
+
+  const handleBookmarkClick = (word) => {
+    const isBookmarked = bookmarks.includes(word);
+
+    if (isBookmarked) {
+      // 이미 북마크되어 있으면 제거
+      setBookmarks(bookmarks.filter(bookmark => bookmark !== word));
+    } else {
+      // 북마크 추가
+      setBookmarks([word, ...bookmarks]);
+    }
+  };
+
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -49,14 +63,18 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
     return sense.filter(meaning => /[가-힣]{2,}/.test(removeHtmlTagsAndString(meaning.definition, '&lt;/FL&gt;')));
   };
 
-  // Render result item
-  const renderResultItem = (item, index) => {
+   // Render result item with Bookmark button
+   const renderResultItem = (item, index) => {
     // '-' 및 '^' 문자를 제거하여 수정된 단어를 생성
-    const modifiedWord = item.word.replace(/[-^]/g, '');
+    const modifiedWord = item.word.replace(/[-]/g, '');
 
     return (
       <div key={index}>
         <h3>{modifiedWord}</h3>
+        {/* 북마크 버튼 */}
+        <button onClick={() => handleBookmarkClick(modifiedWord)}>
+          {bookmarks.includes(modifiedWord) ? '북마크 해제' : '북마크'}
+        </button>
         {/* 뜻을 표시하는 부분 */}
         {filterNonHangulMeanings(item.sense).map((meaning, senseIndex) => (
           <div key={senseIndex}>
@@ -66,8 +84,19 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
             <a href={meaning.link} target="_blank" rel="noopener noreferrer">
               더 알아보기
             </a>
-            
           </div>
+        ))}
+      </div>
+    );
+  };
+
+  // Render bookmarks
+  const renderBookmarks = () => {
+    return (
+      <div>
+        <h2>북마크 목록</h2>
+        {bookmarks.map((word, index) => (
+          <div key={index}>{word}</div>
         ))}
       </div>
     );
@@ -75,6 +104,10 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
 
   return (
     <div>
+      {/* 북마크 목록 표시 */}
+      {renderBookmarks()}
+      
+      {/* 검색 결과 표시 */}
       {processResults(pos1Results).map(renderResultItem)}
       {processResults(pos27Results).map(renderResultItem)}
 
