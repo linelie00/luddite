@@ -28,6 +28,12 @@ const App = () => {
     handleKeyDown,
   } = useSearch();
 
+  const [bookmarks, setBookmarks] = useState([]);
+
+  const updateBookmarks = (newBookmarks) => {
+    setBookmarks(newBookmarks);
+  };
+
   const [divVisible, setDivVisible] = useState(false);
 
   const toggleDiv = () => {
@@ -49,7 +55,7 @@ const App = () => {
           </HeadBottom1>
           <Divider></Divider>
           <HeadBottom2>
-            <Bookmarks/>
+            <Bookmarks bookmarks={bookmarks} updateBookmarks={updateBookmarks} />
             <MeatballButton onClick={toggleDiv} isRotated={divVisible} />
           </HeadBottom2>
         </HeadBottom>
@@ -61,9 +67,10 @@ const App = () => {
           searchResult={searchResult}
           loading={loading}
           error={error}
+          bookmarks={bookmarks}
+          updateBookmarks={updateBookmarks}
         />
       </Mid>
-      
     </div>
   );
 };
