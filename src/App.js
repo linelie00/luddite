@@ -6,6 +6,7 @@ import MeatballButton from './MeatballButton';
 import MeatballDiv from './MeatballDiv';
 import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
+import Bookmarks from './Bookmarks';
 import {
   Head,
   HeadTop,
@@ -14,7 +15,7 @@ import {
   HeadBottom2,
   Divider,
   Mid,
-} from './StyledComponents';  
+} from './StyledComponents';
 
 const App = () => {
   const {
@@ -48,6 +49,7 @@ const App = () => {
           </HeadBottom1>
           <Divider></Divider>
           <HeadBottom2>
+            <Bookmarks/>
             <MeatballButton onClick={toggleDiv} isRotated={divVisible} />
           </HeadBottom2>
         </HeadBottom>
@@ -61,6 +63,7 @@ const App = () => {
           error={error}
         />
       </Mid>
+      
     </div>
   );
 };
