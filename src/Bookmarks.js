@@ -10,7 +10,6 @@ const BookmarksContainer = styled.div`
 const BookmarkItem = styled.div`
   margin: 5px;
   padding: 5px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -24,6 +23,11 @@ const CircleIcon = styled.span`
   border-radius: 50%;
   background-color: #864971; /* 원하는 색상으로 변경하세요 */
   display: inline-block;
+`;
+
+const WordText = styled.span`
+  color: #864971;
+  font-weight: 600;
 `;
 
 const Bookmarks = ({ bookmarks, updateBookmarks }) => {
@@ -67,7 +71,7 @@ const Bookmarks = ({ bookmarks, updateBookmarks }) => {
           onDragEnd={handleDragEnd}
         >
           <CircleIcon />
-          {word}
+          <WordText>{word}</WordText>
         </BookmarkItem>
       ))}
     </BookmarksContainer>

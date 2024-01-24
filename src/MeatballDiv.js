@@ -20,12 +20,12 @@ const CreatedDiv = styled.div`
     width: 95%;
     max-height: 200px;
     overflow-y: auto;
-    margin: 0; /* 수정: CreatedDiv의 margin을 0으로 설정 */
+    margin: 0;
     text-align: left;
     padding: 10px;
     box-sizing: border-box;
     white-space: pre-wrap;
-    margin-right: auto; /* 수정: 오른쪽 마진을 auto로 설정하여 왼쪽 정렬 */
+    margin-right: auto;
 `;
 
 

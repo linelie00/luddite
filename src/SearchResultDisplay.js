@@ -4,8 +4,6 @@ import Bookmarks from './Bookmarks';
 import FilterHangulWords from './FilterHangulWords';
 
 const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBookmarks }) => {
-  // Remove the local state and useState hook for bookmarks here
-
   const handleBookmarkClick = (word) => {
     const isBookmarked = bookmarks.includes(word);
 
@@ -16,6 +14,15 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
       // 북마크 추가
       updateBookmarks([word, ...bookmarks]);
     }
+  };
+
+  const removeSubstringFromMeaning = (meaning, substring) => {
+    if (!meaning || !meaning.definition) {
+      return '';
+    }
+
+    // 특정 문자열을 정규식으로 제거
+    return meaning.definition.replace(new RegExp(substring, 'g'), '');
   };
 
   if (loading) {
@@ -31,38 +38,37 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
   const pos27Results = searchResult?.pos27?.channel?.item;
 
   // Render result item with Bookmark button
-const renderResultItem = (item, index) => {
-  // 수정된 단어를 생성 (여기서 '-' 제거)
-  const modifiedWord = item.word.replace(/-/g, '');
+  const renderResultItem = (item, index) => {
+    // 수정된 단어를 생성 (여기서 '-' 제거)
+    const modifiedWord = item.word.replace(/-/g, '');
 
-  return (
-    <div key={index}>
-      <h3>{modifiedWord}</h3>
-      {/* 북마크 버튼 */}
-      <button onClick={() => handleBookmarkClick(modifiedWord)}>
-        {bookmarks.includes(modifiedWord) ? '북마크 해제' : '북마크'}
-      </button>
-      {/* 뜻을 표시하는 부분 */}
-      {item.sense.map((meaning, senseIndex) => (
-        <div key={senseIndex}>
-          <p>뜻: {meaning.definition}</p>
-          <p>품사: {meaning.pos}</p>
-          {/* 필요한 경우 더 많은 정보 추가 */}
-          <a href={meaning.link} target="_blank" rel="noopener noreferrer">
-            더 알아보기
-          </a>
-        </div>
-      ))}
-    </div>
-  );
-};
+    return (
+      <div key={index}>
+        <h3>{modifiedWord}</h3>
+        {/* 북마크 버튼 */}
+        <button onClick={() => handleBookmarkClick(modifiedWord)}>
+          {bookmarks.includes(modifiedWord) ? '북마크 해제' : '북마크'}
+        </button>
+        {/* 뜻을 표시하는 부분 */}
+        {item.sense.map((meaning, senseIndex) => (
+          <div key={senseIndex}>
+            <p>뜻: {removeSubstringFromMeaning(meaning, '<FL>')}</p>
+            <p>품사: {meaning.pos}</p>
+            {/* 필요한 경우 더 많은 정보 추가 */}
+            <a href={meaning.link} target="_blank" rel="noopener noreferrer">
+              더 알아보기
+            </a>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
-// Filter results with more than 2 syllables
-const filteredPos1Results = FilterHangulWords({ items: pos1Results });
-const filteredPos27Results = FilterHangulWords({ items: pos27Results });
- 
+  // Filter results with more than 2 syllables
+  const filteredPos1Results = FilterHangulWords({ items: pos1Results });
+  const filteredPos27Results = FilterHangulWords({ items: pos27Results });
 
- // Render bookmarks
+  // Render bookmarks
   const renderBookmarks = () => {
     if (!bookmarks || bookmarks.length === 0) {
       return <div></div>;
