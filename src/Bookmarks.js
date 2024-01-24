@@ -72,8 +72,8 @@ const Bookmarks = ({ bookmarks, updateBookmarks }) => {
           onDragOver={() => handleDragOver(index)}
           onDragEnd={handleDragEnd}
         >
-          <CircleIcon />
-          <WordText>{word}</WordText>
+        <CircleIcon />
+        <WordText>{word}</WordText>
         </BookmarkItem>
       ))}
     </BookmarksContainer>
