@@ -1,5 +1,4 @@
 // FilterHangulWords.js
-import React from 'react';
 
 const FilterHangulWords = ({ items }) => {
   if (!items || items.length === 0) {

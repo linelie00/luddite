@@ -13,16 +13,15 @@ export const Head = styled.div`
 `;
 
 export const HeadTop = styled.div`
-  margin: 2px;
   margin-left: auto;
   margin-right: auto;
   background-color: #888888;
   width: 98%;
   height: 40%;
+  margin: 2px;
 `;
 
 export const HeadBottom = styled.div`
-  margin: 2px;
   margin-left: auto;
   margin-right: auto;
   background-color: #eeeeee;
@@ -102,4 +101,15 @@ export const SearchIcon = styled.div`
   width: 22px;
   height: 22px;
   cursor: pointer;
+`;
+
+export const BookmarkListDiv = styled.div`
+  display: flex;
+  width: 94%;
+  height: 100%;
+  //flex-wrap: wrap;
+  margin: 0px;
+  overflow-y: hidden; /* 세로 스크롤을 숨기도록 설정 */
+  overflow-x: auto; /* 가로 스크롤을 허용하도록 설정 */
+  //background-color: #333333;
 `;

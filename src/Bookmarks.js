@@ -5,6 +5,8 @@ import styled from 'styled-components';
 const BookmarksContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: 0px 10px;
+
 `;
 
 const BookmarkItem = styled.div`

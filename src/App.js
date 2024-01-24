@@ -7,6 +7,7 @@ import MeatballDiv from './MeatballDiv';
 import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
 import Bookmarks from './Bookmarks';
+import ChevronsButton from './ChevronsButton';
 import {
   Head,
   HeadTop,
@@ -15,6 +16,7 @@ import {
   HeadBottom2,
   Divider,
   Mid,
+  BookmarkListDiv,
 } from './StyledComponents';
 
 const App = () => {
@@ -40,6 +42,14 @@ const App = () => {
     setDivVisible(!divVisible);
   };
 
+  const [scrollOffset, setScrollOffset] = useState(0);
+
+  const handleButtonClick = () => {
+    // 버튼을 눌렀을 때 스크롤을 일정 픽셀만큼 이동 또는 처음으로 돌아오기
+    const newOffset = (scrollOffset + 200) % 400; // 여기서 400은 스크롤 되는 범위입니다.
+    setScrollOffset(newOffset);
+  };
+
   return (
     <div>
       <Head>
@@ -55,12 +65,15 @@ const App = () => {
           </HeadBottom1>
           <Divider></Divider>
           <HeadBottom2>
-            <Bookmarks bookmarks={bookmarks} updateBookmarks={updateBookmarks} />
+            <BookmarkListDiv>
+              <Bookmarks bookmarks={bookmarks} updateBookmarks={updateBookmarks} />
+            </BookmarkListDiv>
+            <ChevronsButton onButtonClick={handleButtonClick} />
             <MeatballButton onClick={toggleDiv} isRotated={divVisible} />
           </HeadBottom2>
         </HeadBottom>
       </Head>
-      <MeatballDiv isVisible={divVisible} />
+      <MeatballDiv isVisible={divVisible} bookmarks={bookmarks} updateBookmarks={updateBookmarks} />
       <Mid>
         <b>{searchValue}</b>
         <SearchResultDisplay
