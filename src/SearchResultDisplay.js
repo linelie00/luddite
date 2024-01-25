@@ -20,13 +20,15 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
   };
 
   const removeHtmlTagsAndString = (htmlString, stringToRemove) => {
-    // HTML 엔터티를 해당 문자로 변환
-    const decodedString = new DOMParser().parseFromString(htmlString, 'text/html').body.textContent || "";
-  
+    const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+    let textContent = doc.body.textContent || "";
     // 특정 문자열 제거
-    const pattern = new RegExp(stringToRemove, 'gi');
-    return decodedString.replace(pattern, '');
+    textContent = textContent.replace(stringToRemove, '');
+    // <FL> 및 </FL> 문자열 제거
+    textContent = textContent.replace(/<FL>|<\/FL>/g, '');
+    return textContent;
 };
+
   
 
   if (loading) {
