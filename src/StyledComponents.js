@@ -52,7 +52,7 @@ export const HeadBottom2 = styled.div`
 `;
 
 export const Mid = styled.div`
-  width: 90%;
+  width: 50%;
   height: 500px;
   background-color: #eeeeee;
   overflow-y: auto;
@@ -128,5 +128,51 @@ export const BookmarkListDiv = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background-color: transparent; /* 스크롤 바 색상을 투명으로 설정 */
+  }
+`;
+
+export const ResultItemContainer = styled.div`
+  padding: 20px;
+  //margin-bottom: 10px;
+  //height: 150px;
+  h3 {
+    color: #864971;
+    font-size: 22px;
+    margin: 0;
+  }
+
+  button {
+    position: relative; /* 위치를 상대적으로 설정 */
+    left: 88%; /* 기본 상태에서 왼쪽으로 10px 이동 */
+    top: 38px;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  button img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .meaningDiv {
+    width: 80%;
+  }
+
+  p {
+    //margin: 5px 0;
+    color: #864971;
+  }
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 5px;
+    display: block;
   }
 `;

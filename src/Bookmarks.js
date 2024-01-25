@@ -22,7 +22,7 @@ const CircleIcon = styled.span`
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background-color: #864971; /* 원하는 색상으로 변경하세요 */
+  background-color: #864971;
   display: inline-block;
 `;
 

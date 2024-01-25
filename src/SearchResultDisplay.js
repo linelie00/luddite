@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import Bookmarks from './Bookmarks';
 import FilterHangulWords from './FilterHangulWords';
+import { ResultItemContainer } from './StyledComponents';
+import emptystarIcon from './emptystarIcon.svg';
+import fullstarIcon from './fullstarIcon.svg';
 
 const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBookmarks }) => {
   const handleBookmarkClick = (word) => {
@@ -16,14 +19,15 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
     }
   };
 
-  const removeSubstringFromMeaning = (meaning, substring) => {
-    if (!meaning || !meaning.definition) {
-      return '';
-    }
-
-    // 특정 문자열을 정규식으로 제거
-    return meaning.definition.replace(new RegExp(substring, 'g'), '');
-  };
+  const removeHtmlTagsAndString = (htmlString, stringToRemove) => {
+    // HTML 엔터티를 해당 문자로 변환
+    const decodedString = new DOMParser().parseFromString(htmlString, 'text/html').body.textContent || "";
+  
+    // 특정 문자열 제거
+    const pattern = new RegExp(stringToRemove, 'gi');
+    return decodedString.replace(pattern, '');
+};
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,16 +47,21 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
     const modifiedWord = item.word.replace(/-/g, '');
 
     return (
-      <div key={index}>
-        <h3>{modifiedWord}</h3>
+      <ResultItemContainer key={index}>
         {/* 북마크 버튼 */}
         <button onClick={() => handleBookmarkClick(modifiedWord)}>
-          {bookmarks.includes(modifiedWord) ? '북마크 해제' : '북마크'}
+          {bookmarks.includes(modifiedWord) ? (
+            <img src={fullstarIcon} alt="Full Star"/>
+            ) : (
+            <img src={emptystarIcon} alt="Empty Star"/>
+          )}
         </button>
+        <h3>{modifiedWord}</h3>
         {/* 뜻을 표시하는 부분 */}
+        <div className="meaningDiv">
         {item.sense.map((meaning, senseIndex) => (
           <div key={senseIndex}>
-            <p>뜻: {removeSubstringFromMeaning(meaning, '<FL>')}</p>
+            <p>: {removeHtmlTagsAndString(meaning.definition, '<FL>')}</p>
             <p>품사: {meaning.pos}</p>
             {/* 필요한 경우 더 많은 정보 추가 */}
             <a href={meaning.link} target="_blank" rel="noopener noreferrer">
@@ -60,7 +69,8 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
             </a>
           </div>
         ))}
-      </div>
+        </div>
+      </ResultItemContainer>
     );
   };
 
@@ -79,7 +89,7 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
   return (
     <div>
       {/* 북마크 목록 표시 */}
-      {renderBookmarks()}
+      {/* renderBookmarks() */}
     
       {/* 검색 결과 표시 */}
       {filteredPos1Results.map(renderResultItem)}

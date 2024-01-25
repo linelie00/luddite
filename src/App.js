@@ -76,7 +76,6 @@ const App = () => {
       </Head>
       <MeatballDiv isVisible={divVisible} bookmarks={bookmarks} updateBookmarks={updateBookmarks} />
       <Mid>
-        <b>{searchValue}</b>
         <SearchResultDisplay
           searchResult={searchResult}
           loading={loading}
