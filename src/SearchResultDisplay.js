@@ -1,21 +1,28 @@
 // SearchResultDisplay.js
 import React, { useState } from 'react';
 import Bookmarks from './Bookmarks';
-import FilterHangulWords from './FilterHangulWords'; // 새로 추가
+import FilterHangulWords from './FilterHangulWords';
 
-const SearchResultDisplay = ({ searchResult, loading, error }) => {
-  const [bookmarks, setBookmarks] = useState([]);
-
+const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBookmarks }) => {
   const handleBookmarkClick = (word) => {
     const isBookmarked = bookmarks.includes(word);
 
     if (isBookmarked) {
       // 이미 북마크되어 있으면 제거
-      setBookmarks(bookmarks.filter(bookmark => bookmark !== word));
+      updateBookmarks(bookmarks.filter(bookmark => bookmark !== word));
     } else {
-      // 북마크 추가 전개연산자
-      setBookmarks([word, ...bookmarks]);
+      // 북마크 추가
+      updateBookmarks([word, ...bookmarks]);
     }
+  };
+
+  const removeSubstringFromMeaning = (meaning, substring) => {
+    if (!meaning || !meaning.definition) {
+      return '';
+    }
+
+    // 특정 문자열을 정규식으로 제거
+    return meaning.definition.replace(new RegExp(substring, 'g'), '');
   };
 
   if (loading) {
@@ -30,14 +37,10 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
   const pos1Results = searchResult?.pos1?.channel?.item;
   const pos27Results = searchResult?.pos27?.channel?.item;
 
-  // Filter results with more than 2 syllables
-  const filteredPos1Results = FilterHangulWords({ items: pos1Results });
-  const filteredPos27Results = FilterHangulWords({ items: pos27Results });
-
   // Render result item with Bookmark button
   const renderResultItem = (item, index) => {
-    // 수정된 단어를 생성
-    const modifiedWord = item.word.replace(/[-]/g, '');
+    // 수정된 단어를 생성 (여기서 '-' 제거)
+    const modifiedWord = item.word.replace(/-/g, '');
 
     return (
       <div key={index}>
@@ -49,7 +52,7 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
         {/* 뜻을 표시하는 부분 */}
         {item.sense.map((meaning, senseIndex) => (
           <div key={senseIndex}>
-            <p>뜻: {meaning.definition}</p>
+            <p>뜻: {removeSubstringFromMeaning(meaning, '<FL>')}</p>
             <p>품사: {meaning.pos}</p>
             {/* 필요한 경우 더 많은 정보 추가 */}
             <a href={meaning.link} target="_blank" rel="noopener noreferrer">
@@ -60,6 +63,10 @@ const SearchResultDisplay = ({ searchResult, loading, error }) => {
       </div>
     );
   };
+
+  // Filter results with more than 2 syllables
+  const filteredPos1Results = FilterHangulWords({ items: pos1Results });
+  const filteredPos27Results = FilterHangulWords({ items: pos27Results });
 
   // Render bookmarks
   const renderBookmarks = () => {

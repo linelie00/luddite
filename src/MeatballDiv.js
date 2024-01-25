@@ -2,13 +2,13 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import Bookmarks from './Bookmarks';
 
 const DivContainer = styled.div`
     position: absolute;
     width: 95%;
-    left: 50%;
-    margin: -60px auto; /* 수정: 가로로 중앙 정렬, 오른쪽은 auto로 유지 */
-    margin-left: -3px; /* 수정: 왼쪽으로 3px 이동 */
+    left: 49.8%;
+    margin: -60px auto;
     transform: translateX(-50%);
     z-index: 15; /* 새로운 Div를 상위로 올림 */
     box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
@@ -20,29 +20,20 @@ const CreatedDiv = styled.div`
     width: 95%;
     max-height: 200px;
     overflow-y: auto;
-    margin: 0; /* 수정: CreatedDiv의 margin을 0으로 설정 */
+    margin: 0;
     text-align: left;
-    padding: 10px;
+    padding: 0px;
     box-sizing: border-box;
     white-space: pre-wrap;
-    margin-right: auto; /* 수정: 오른쪽 마진을 auto로 설정하여 왼쪽 정렬 */
+    margin-right: 300;
 `;
 
 
-const MeatballDiv = ({ isVisible }) => {
+const MeatballDiv = ({ isVisible, bookmarks, updateBookmarks }) => {
     return (
         <DivContainer>
             <CreatedDiv visible={isVisible}>
-                {/* 예시 텍스트 */}
-                This is a sample text that will automatically wrap to the next line
-                if it becomes too long vertically. It will also have a maximum height,
-                and if the content exceeds that height, a scrollbar will appear.
-                This is a sample text that will automatically wrap to the next line
-                if it becomes too long vertically. It will also have a maximum height,
-                and if the content exceeds that height, a scrollbar will appear.
-                This is a sample text that will automatically wrap to the next line
-                if it becomes too long vertically. It will also have a maximum height,
-                and if the content exceeds that height, a scrollbar will appear.
+                <Bookmarks bookmarks={bookmarks} updateBookmarks={updateBookmarks} />
             </CreatedDiv>
         </DivContainer>
     );

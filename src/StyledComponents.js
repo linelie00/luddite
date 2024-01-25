@@ -13,16 +13,15 @@ export const Head = styled.div`
 `;
 
 export const HeadTop = styled.div`
-  margin: 2px;
   margin-left: auto;
   margin-right: auto;
   background-color: #888888;
   width: 98%;
   height: 40%;
+  margin: 2px;
 `;
 
 export const HeadBottom = styled.div`
-  margin: 2px;
   margin-left: auto;
   margin-right: auto;
   background-color: #eeeeee;
@@ -102,4 +101,32 @@ export const SearchIcon = styled.div`
   width: 22px;
   height: 22px;
   cursor: pointer;
+`;
+
+export const BookmarkListDiv = styled.div`
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  display: flex;
+  width: 92%;
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  margin: 0;
+  /* 추가된 부분 */
+  > * {
+    flex-shrink: 0;
+  }
+  /* background-color: #333333; */
+  &.scroll {
+    overflow-x: auto; /* 가로 스크롤을 허용하도록 설정 */
+  }
+
+  /* 스크롤 바 숨기기 */
+  &::-webkit-scrollbar {
+    height: 0; /* 가로 스크롤 바의 높이를 0으로 설정 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent; /* 스크롤 바 색상을 투명으로 설정 */
+  }
 `;
