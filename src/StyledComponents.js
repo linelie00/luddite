@@ -137,7 +137,7 @@ export const Blank = styled.div`
 `;
 
 export const ResultItemContainer = styled.div`
-  padding: 20px;
+  padding: 0px 10px;
   //margin-bottom: 10px;
   //height: 150px;
   h3 {
