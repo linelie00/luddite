@@ -52,7 +52,7 @@ export const HeadBottom2 = styled.div`
 `;
 
 export const Mid = styled.div`
-  width: 50%;
+  width: 60%;
   height: 500px;
   background-color: #eeeeee;
   overflow-y: auto;
@@ -129,6 +129,11 @@ export const BookmarkListDiv = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: transparent; /* 스크롤 바 색상을 투명으로 설정 */
   }
+`;
+
+export const Blank = styled.div`
+  width: 400px;
+  height: 100%;
 `;
 
 export const ResultItemContainer = styled.div`

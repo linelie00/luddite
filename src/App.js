@@ -17,6 +17,7 @@ import {
   Divider,
   Mid,
   BookmarkListDiv,
+  Blank,
 } from './StyledComponents';
 
 const App = () => {
@@ -66,8 +67,9 @@ const App = () => {
           </HeadBottom1>
           <Divider></Divider>
           <HeadBottom2>
-            <BookmarkListDiv>
+            <BookmarkListDiv id="BookmarkListDiv">
               <Bookmarks bookmarks={bookmarks} updateBookmarks={updateBookmarks} />
+              <Blank></Blank>
             </BookmarkListDiv>
             <ChevronsButton onButtonClick={handleButtonClick} />
             <MeatballButton onClick={toggleDiv} isRotated={divVisible} />

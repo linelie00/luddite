@@ -50,6 +50,7 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
 
     return (
       <ResultItemContainer key={index}>
+        
         {/* 북마크 버튼 */}
         <button onClick={() => handleBookmarkClick(modifiedWord)}>
           {bookmarks.includes(modifiedWord) ? (
@@ -58,13 +59,14 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
             <img src={emptystarIcon} alt="Empty Star"/>
           )}
         </button>
+        {/* 단어를 표시하는 부분 */}
         <h3>{modifiedWord}</h3>
         {/* 뜻을 표시하는 부분 */}
         <div className="meaningDiv">
         {item.sense.map((meaning, senseIndex) => (
           <div key={senseIndex}>
             <p>: {removeHtmlTagsAndString(meaning.definition, '<FL>')}</p>
-            <p>품사: {meaning.pos}</p>
+            {/*<p>품사: {meaning.pos}</p>*/}
             {/* 필요한 경우 더 많은 정보 추가 */}
             <a href={meaning.link} target="_blank" rel="noopener noreferrer">
               더 알아보기

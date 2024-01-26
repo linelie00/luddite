@@ -1,5 +1,3 @@
-// FilterHangulWords.js
-
 const FilterHangulWords = ({ items }) => {
   if (!items || items.length === 0) {
     return [];
@@ -9,7 +7,7 @@ const FilterHangulWords = ({ items }) => {
   const uniqueWordsSet = new Set();
   const filteredResults = items.filter(item => {
     const word = item.word?.replace(/-/g, ''); // '-' 제거
-    if (word && word.match(/[가-힣]{2,}/) && !uniqueWordsSet.has(word)) {
+    if (word && word.match(/^[가-힣]{2,}$/) && !uniqueWordsSet.has(word)) {
       uniqueWordsSet.add(word);
       return true;
     }
