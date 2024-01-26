@@ -18,7 +18,7 @@ const DivContainer = styled.div`
 const CreatedDiv = styled.div`
     display: ${props => props.visible ? 'block' : 'none'};
     width: 95%;
-    max-height: 200px;
+    max-height: 170px;
     overflow-y: auto;
     margin: 0;
     text-align: left;
@@ -26,6 +26,13 @@ const CreatedDiv = styled.div`
     box-sizing: border-box;
     white-space: pre-wrap;
     margin-right: 300;
+    &::-webkit-scrollbar {
+        height: 0; /* 가로 스크롤 바의 높이를 0으로 설정 */
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        background-color: transparent; /* 스크롤 바 색상을 투명으로 설정 */
+      }
 `;
 
 
