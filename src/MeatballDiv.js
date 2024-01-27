@@ -6,14 +6,16 @@ import Bookmarks from './Bookmarks';
 
 const DivContainer = styled.div`
     position: absolute;
-    width: 95%;
-    left: 49.8%;
-    margin: -60px auto;
+    width: 96%;
+    top: 200px;
+    left: 50%;
     transform: translateX(-50%);
-    z-index: 15; /* 새로운 Div를 상위로 올림 */
+    z-index: 16; /* 새로운 Div를 상위로 올림 */
     box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
-    background-color: #ffffff;
+    background-color: #fff;
 `;
+
+
 
 const CreatedDiv = styled.div`
     display: ${props => props.visible ? 'block' : 'none'};

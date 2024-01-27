@@ -2,10 +2,10 @@
 import styled from 'styled-components';
 
 export const Head = styled.div`
-  width: 99%;
+  width: 100%;
   height: 250px;
   background-color: #ffffff;
-  margin: 5px;
+  //margin: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,18 +15,18 @@ export const Head = styled.div`
 export const HeadTop = styled.div`
   margin-left: auto;
   margin-right: auto;
-  background-color: #888888;
+  //background-color: #888888;
   width: 98%;
-  height: 40%;
+  height: 50%;
   margin: 2px;
 `;
 
 export const HeadBottom = styled.div`
   margin-left: auto;
   margin-right: auto;
-  background-color: #eeeeee;
+  //background-color: #eeeeee;
   width: 98%;
-  height: 55%;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,11 +54,11 @@ export const HeadBottom2 = styled.div`
 export const Mid = styled.div`
   width: 70%;
   min-width: 700px;
-  height: 500px;
+  height: 530px;
   background-color: #eeeeee;
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 5px;
+  //margin: 5px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -69,6 +69,7 @@ export const Divider = styled.div`
   width: 98%;
   height: 3px;
   background-color: #864971;
+  z-index: 17;
 `;
 
 export const PillTextBoxContainer = styled.div`
