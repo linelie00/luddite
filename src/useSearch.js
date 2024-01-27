@@ -57,22 +57,36 @@ const useSearch = () => {
     }
   }, [searchValue]);
 
-  const isHangul = (text) => {
-    const hangulRegex = /[가-힣]/;
-    return hangulRegex.test(text);
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearchValue(value);
-  };
-
   useEffect(() => {
+    // Save the current search results to prevSearchResults when searchResult changes
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    const fetchDataAndHandleErrors = async (pos) => {
+      try {
+        await fetchData(pos);
+      } catch (error) {
+        console.error(`데이터를 불러오는 중 에러 발생 (pos: ${pos}):`, error);
+        setSearchResult(prevResult => ({
+          ...prevResult,
+          [pos === 1 ? 'pos1' : 'pos27']: null,
+        }));
+        setError(`데이터를 불러오는 중 에러 발생 (pos: ${pos})`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const isHangul = (text) => {
+      const hangulRegex = /[가-힣]/;
+      return hangulRegex.test(text);
+    };
+
     const handleFetchData = async () => {
       if (searchValue.trim() !== '') {
         if (isHangul(searchValue)) {
-          await fetchData(1); // pos 값이 1일 때 호출
-          await fetchData(27); // pos 값이 27일 때 호출
+          await fetchDataAndHandleErrors(1); // pos 값이 1일 때 호출
+          await fetchDataAndHandleErrors(27); // pos 값이 27일 때 호출
         } else {
           setSearchResult({ pos1: null, pos27: null });
           setError('잘못된 값입니다.'); // 자음과 모음뿐이거나 한글이 아닌 경우 에러
@@ -84,7 +98,15 @@ const useSearch = () => {
     };
 
     handleFetchData();
+
+    // Cleanup function to abort the fetch when the component is unmounted
+    return () => abortController.abort();
   }, [searchValue, fetchData]);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+  };
 
   const handleSearchClick = () => {
     fetchData();
