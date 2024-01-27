@@ -30,7 +30,7 @@ const ChevronsButton = ({ onButtonClick }) => {
       
         const bookmarkListDiv = document.getElementById('BookmarkListDiv');
         if (bookmarkListDiv) {
-          const scrollAmount = 400;
+          const scrollAmount = 500;
           const currentScroll = bookmarkListDiv.scrollLeft;
           const newScroll = currentScroll + scrollAmount;
       

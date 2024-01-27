@@ -52,10 +52,12 @@ export const HeadBottom2 = styled.div`
 `;
 
 export const Mid = styled.div`
-  width: 60%;
+  width: 70%;
+  min-width: 700px;
   height: 500px;
   background-color: #eeeeee;
   overflow-y: auto;
+  overflow-x: hidden;
   margin: 5px;
   margin-left: auto;
   margin-right: auto;
@@ -131,13 +133,14 @@ export const BookmarkListDiv = styled.div`
   }
 `;
 
+//북마크 목록 뒤 공간
 export const Blank = styled.div`
-  width: 400px;
+  width: 500px;
   height: 100%;
 `;
 
 export const ResultItemContainer = styled.div`
-  padding: 0px 10px;
+  padding: 0px 20px;
   //margin-bottom: 10px;
   //height: 150px;
   h3 {
@@ -152,6 +155,34 @@ export const ResultItemContainer = styled.div`
     top: 38px;
     width: 40px;
     height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+  
+  .bookmarkButton {
+    position: relative;
+    left: 88%;
+    top: 38px;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  .copyButton {
+    position: relative;
+    left: 89%;
+    top: 40px;
+    width: 42px;
+    height: 42px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -180,4 +211,16 @@ export const ResultItemContainer = styled.div`
     margin-top: 5px;
     display: block;
   }
+`;
+
+export const ClipboardAlert = styled.div`
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #8a8a8a;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
 `;
