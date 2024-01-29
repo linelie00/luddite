@@ -5,7 +5,7 @@ import headerIcon from './headerIcon.svg';
 export const Head = styled.div`
   width: 100%;
   height: 250px;
-  background-color: #ffffff;
+  //background-color: #999999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,6 +44,7 @@ export const HeadBottom1 = styled.div`
   height: 45%;
   overflow: hidden;
   display: flex;
+  margin: 12px 0 0 0;
 `;
 
 export const HeadBottom2 = styled.div`

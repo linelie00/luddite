@@ -7,7 +7,7 @@ import Bookmarks from './Bookmarks';
 const DivContainer = styled.div`
     position: absolute;
     width: 96%;
-    top: 200px;
+    top: 207px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 16; /* 새로운 Div를 상위로 올림 */
