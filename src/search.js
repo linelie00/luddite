@@ -41,12 +41,7 @@ const SearchIcon = styled.img`
   cursor: pointer;
 `;
 
-const PillTextBox = ({ value, onChange, onEnter }) => {
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      onEnter && onEnter();
-    }
-  };
+const PillTextBox = ({ value, onChange }) => {
 
   return (
     <PillTextBoxContainer>
@@ -55,7 +50,6 @@ const PillTextBox = ({ value, onChange, onEnter }) => {
         placeholder="검색어를 입력하세요"
         value={value}
         onChange={onChange}
-        onKeyDown={handleKeyDown}
       />
       <SearchIcon src={searchIcon} alt="Search" />
     </PillTextBoxContainer>

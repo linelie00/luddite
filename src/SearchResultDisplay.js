@@ -103,6 +103,8 @@ const handleCopyToClipboard = (word) => {
     <div>
       {/* 북마크 목록 표시 */}
       {/* renderBookmarks() */}
+
+      {clipboardAlert && <ClipboardAlert>{clipboardAlert}</ClipboardAlert>}
     
       {/* 검색 결과 표시 */}
       {filteredPos1Results.map(renderResultItem)}

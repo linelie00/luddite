@@ -28,7 +28,6 @@ const App = () => {
     loading,
     error,
     handleChange,
-    handleSearchClick,
     handleKeyDown,
   } = useSearch();
 
@@ -58,7 +57,6 @@ const App = () => {
             <PillTextBox
               value={searchValue}
               onChange={handleChange}
-              onEnter={handleKeyDown}
             />
             <Toggle />
           </HeadBottom1>
