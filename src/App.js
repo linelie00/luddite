@@ -8,6 +8,7 @@ import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
 import Bookmarks from './Bookmarks';
 import ChevronsButton from './ChevronsButton';
+import TextInput from './SearchText.js';
 import {
   Head,
   HeadTop,
@@ -48,6 +49,7 @@ const App = () => {
 
   return (
     <div>
+      <TextInput />
       <Head>
         <HeadTop>
           <HeaderIcon />

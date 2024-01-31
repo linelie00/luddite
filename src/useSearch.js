@@ -44,7 +44,7 @@ const useSearch = () => {
         ...prevResult,
         [pos === 1 ? 'pos1' : 'pos27']: response.data,
       }));
-      console.log(`호출에 성공했습니다. (pos: ${pos})`);
+      console.log(`호출에 성공했습니다. (pos: ${pos}, word: ${searchValue})`);
     } catch (error) {
       console.error(`데이터를 불러오는 중 에러 발생 (pos: ${pos}):`, error);
       setSearchResult(prevResult => ({
@@ -63,23 +63,39 @@ const useSearch = () => {
   };
 
   const handleChange = (e) => {
+    console.log('이벤트:', e);
+    
+    if (!e || !e.target) {
+      console.error('이벤트 객체 또는 이벤트 타겟이 정의되지 않았습니다.');
+      return;
+    }
+  
     const value = e.target.value;
     setSearchValue(value);
+  };
+  const handleKeyDown = (e) => {
+    // 여기에 필요한 keydown 이벤트 처리 로직을 추가
   };
 
   useEffect(() => {
     const handleFetchData = async () => {
-      if (searchValue.trim() !== '') {
-        if (isHangul(searchValue)) {
-          await fetchData(1); // pos 값이 1일 때 호출
-          await fetchData(27); // pos 값이 27일 때 호출
+      try {
+        if (searchValue.trim() !== '') {
+          if (isHangul(searchValue)) {
+            await fetchData(1); // pos 값이 1일 때 호출
+            await fetchData(27); // pos 값이 27일 때 호출
+          } else {
+            setSearchResult({ pos1: null, pos27: null });
+            setError('잘못된 값입니다.'); // 자음과 모음뿐이거나 한글이 아닌 경우 에러
+          }
         } else {
           setSearchResult({ pos1: null, pos27: null });
-          setError('잘못된 값입니다.'); // 자음과 모음뿐이거나 한글이 아닌 경우 에러
+          setError(null);
         }
-      } else {
+      } catch (error) {
+        console.error('데이터를 불러오는 중 에러 발생:', error);
         setSearchResult({ pos1: null, pos27: null });
-        setError(null);
+        setError('데이터를 불러오는 중 에러 발생');
       }
     };
 

@@ -1,6 +1,8 @@
-// PillTextBox.js
-import React, { useState, useEffect } from 'react';
+// YourComponent.js
+
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import useApiSearch from './useApiSearch';
 import searchIcon from './searchIcon.svg';
 
 const PillTextBoxContainer = styled.div`
@@ -22,12 +24,12 @@ const PillTextBoxInput = styled.input`
   outline: none;
   flex: 1;
   background: transparent;
-  font-size: 18px; /* 수정된 부분: 폰트 크기를 18px로 수정 */
+  font-size: 18px;
   font-weight: 600;
   margin-left: 3px;
   color: #e9e9e9;
-  &::placeholder { /* 수정된 부분: placeholder 스타일 추가 */
-    color: #B89DAF;
+  &::placeholder {
+    color: #b89daf;
   }
 `;
 
@@ -41,19 +43,22 @@ const SearchIcon = styled.img`
   cursor: pointer;
 `;
 
-const PillTextBox = ({ value, onChange }) => {
+const YourComponent = () => {
+  const [inputValue, setInputValue] = useState('');
+  const { searchResult, loading, error } = useApiSearch(inputValue);
 
   return (
     <PillTextBoxContainer>
       <PillTextBoxInput
         type="text"
+        id="input"
         placeholder="검색어를 입력하세요"
-        value={value}
-        onChange={onChange}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
       <SearchIcon src={searchIcon} alt="Search" />
     </PillTextBoxContainer>
   );
 };
 
-export default PillTextBox;
+export default YourComponent;
