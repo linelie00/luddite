@@ -76,15 +76,26 @@ const useSearch = () => {
   };
 
   useEffect(() => {
-    const handleFetchData = async () => {
+
+    let timer;
+
+
+    const debouncedFetchData = (func, delay) => {
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), delay);
+      };
+    };
+  
+    const fetchDataWithDebounce = debouncedFetchData(async () => {
       try {
         if (searchValue.trim() !== '') {
           if (isHangul(searchValue)) {
-            await fetchData(1); // pos 값이 1일 때 호출
-            await fetchData(27); // pos 값이 27일 때 호출
+            await fetchData(1);
+            await fetchData(27);
           } else {
             setSearchResult({ pos1: null, pos27: null });
-            setError('잘못된 값입니다.'); // 자음과 모음뿐이거나 한글이 아닌 경우 에러
+            setError('잘못된 값입니다.');
           }
         } else {
           setSearchResult({ pos1: null, pos27: null });
@@ -95,26 +106,14 @@ const useSearch = () => {
         setSearchResult({ pos1: null, pos27: null });
         setError('데이터를 불러오는 중 에러 발생');
       }
-    };
+    }, 500);
+  
+    fetchDataWithDebounce();
 
-    const debouncedFetchData = debounce(handleFetchData, 500);
-
-    debouncedFetchData();
-
-    // Cleanup function
     return () => {
-      clearTimeout(debouncedFetchData);
+      clearTimeout(timer);
     };
   }, [searchValue, fetchData]);
-
-  // Debounce utility function
-  const debounce = (func, delay) => {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func(...args), delay);
-    };
-  };
 
   return {
     searchValue,
