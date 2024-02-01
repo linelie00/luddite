@@ -41,14 +41,9 @@ const SearchIcon = styled.img`
   cursor: pointer;
 `;
 
-const Search = ({ onInputChange }) => {
+const YourComponent = () => {
   const [inputValue, setInputValue] = useState('');
   const { searchResult, loading, error } = useApiSearch(inputValue);
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-    onInputChange(e.target.value); // 부모 컴포넌트에 변경사항 알림
-  };
 
   return (
     <PillTextBoxContainer>
@@ -57,11 +52,11 @@ const Search = ({ onInputChange }) => {
         id="input"
         placeholder="검색어를 입력하세요"
         value={inputValue}
-        onChange={handleInputChange}
+        onChange={(e) => setInputValue(e.target.value)}
       />
       <SearchIcon src={searchIcon} alt="Search" />
     </PillTextBoxContainer>
   );
 };
 
-export default Search;
+export default YourComponent;

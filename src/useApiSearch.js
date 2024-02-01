@@ -1,128 +1,82 @@
-// useSearch.js
-import { useState, useEffect, useCallback } from 'react';
+// useApiSearch.js
+
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const useSearch = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [searchResult, setSearchResult] = useState({ pos1: { channel: { item: [] } }, pos27: { channel: { item: [] } } });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const useApiSearch = (inputValue, debounceTime = 500) => {
+  const [searchResult, setSearchResult] = useState({ pos1: [], pos27: [] });
+  const [loading, setLoading] = useState({ pos1: false, pos27: false });
+  const [error, setError] = useState({ pos1: null, pos27: null });
 
-  const fetchData = useCallback(
-    async (pos) => {
+  useEffect(() => {
+    let timer;
+
+    const fetchData = async (pos) => {
       try {
-        setLoading(true);
-        setError(null);
+        setLoading({ ...loading, [pos]: true });
+        setError({ ...error, [pos]: null });
 
         const apiKey = "C956A2407AF0A3C67401DA0B27201261";
 
         const parameters = {
-          certkey_no: 6136,
-          key: apiKey,
-          advanced: 'y',
-          type1: 'word',
-          pos: pos,
-          method: 'start',
-          target_type: 'search',
-          req_type: 'json',
-          part: 'word',
-          q: searchValue,
-          sort: 'popular',
-          start: 1,
-          num: 1000,
-          letter_s: 2
+            certkey_no: 6136,
+            key: apiKey,
+            advanced: 'y',
+            type1: 'word',
+            pos: pos,
+            method: 'start',
+            target_type: 'search',
+            req_type: 'json',
+            part: 'word',
+            q: inputValue,
+            sort: 'popular',
+            start: 1,
+            num: 1000,
+            letter_s: 2
         };
 
-        const queryString = Object.entries(parameters)
-          .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-          .join('&');
+    const queryString = Object.entries(parameters)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join('&');
 
-        const url = `http://localhost:3000/api/search?${queryString}`;
+    const url = `http://localhost:3000/api/search?${queryString}`;
 
-        const response = await axios.get(url);
+    const response = await axios.get(url);
 
-        setSearchResult((prevResult) => ({
-          ...prevResult,
-          [pos === 1 ? 'pos1' : 'pos27']: { channel: { item: response.data.data || [] } },
-        }));
-        console.log(`호출에 성공했습니다. (pos: ${pos}, word: ${searchValue})`);
-      } catch (error) {
-        console.error(`데이터를 불러오는 중 에러 발생 (pos: ${pos}):`, error);
-        setSearchResult((prevResult) => ({
-          ...prevResult,
-          [pos === 1 ? 'pos1' : 'pos27']: { channel: { item: [] } },
-        }));
-        setError((prevError) => ({ ...prevError, [pos]: `데이터를 불러오는 중 에러 발생 (pos: ${pos})` }));
-      } finally {
-        setLoading(false);
+    setSearchResult((prevResult) => ({ ...prevResult, [pos]: response.data.data || [] }));
+    console.log(`호출에 성공했습니다. (pos: ${pos}, word: ${inputValue})`);
+    } catch (error) {
+    console.error(`데이터를 불러오는 중 에러 발생 (pos: ${pos}):`, error);
+    setSearchResult((prevResult) => ({ ...prevResult, [pos]: [] }));
+    setError((prevError) => ({ ...prevError, [pos]: `데이터를 불러오는 중 에러 발생 (pos: ${pos})` }));
+    } finally {
+    setLoading((prevLoading) => ({ ...prevLoading, [pos]: false }));
+    }
+    };
+
+    if (inputValue.trim() !== '') {
+      if (timer) {
+        clearTimeout(timer);
       }
-    },
-    [searchValue]
-  );
 
-  const isHangul = (text) => {
-    const hangulRegex = /[가-힣]/;
-    return hangulRegex.test(text);
-  };
-
-  const handleChange = (e) => {
-    if (!e || !e.target) {
-      console.error('이벤트 객체 또는 이벤트 타겟이 정의되지 않았습니다.');
-      return;
+      // pos1과 pos27 각각 호출
+      timer = setTimeout(() => {
+        fetchData(1);
+        fetchData(27);
+      }, debounceTime);
+    } else {
+      setSearchResult({ pos1: [], pos27: [] });
+      setError({ pos1: null, pos27: null });
     }
 
-    const value = e.target.value;
-    setSearchValue(value);
-  };
-
-  useEffect(() => {
-    const handleFetchData = async () => {
-      try {
-        if (searchValue && searchValue.trim() !== '') {
-          if (isHangul(searchValue)) {
-            await fetchData(1); // pos 값이 1일 때 호출
-            await fetchData(27); // pos 값이 27일 때 호출
-          } else {
-            setSearchResult({ pos1: { channel: { item: [] } }, pos27: { channel: { item: [] } } });
-            setError('잘못된 값입니다.'); // 자음과 모음뿐이거나 한글이 아닌 경우 에러
-          }
-        } else {
-          setSearchResult({ pos1: { channel: { item: [] } }, pos27: { channel: { item: [] } } });
-          setError(null);
-        }
-      } catch (error) {
-        console.error('데이터를 불러오는 중 에러 발생:', error);
-        setSearchResult({ pos1: { channel: { item: [] } }, pos27: { channel: { item: [] } } });
-        setError('데이터를 불러오는 중 에러 발생');
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
       }
     };
+  }, [inputValue, debounceTime]);
 
-    const debouncedFetchData = debounce(handleFetchData, 500);
-
-    debouncedFetchData();
-
-    // Cleanup function
-    return () => {
-      clearTimeout(debouncedFetchData);
-    };
-  }, [searchValue, fetchData]);
-
-  // Debounce utility function
-  const debounce = (func, delay) => {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func(...args), delay);
-    };
-  };
-
-  return {
-    searchValue,
-    searchResult,
-    loading,
-    error,
-    handleChange,
-  };
+  return { searchResult, loading, error };
 };
 
-export default useSearch;
+export default useApiSearch;
