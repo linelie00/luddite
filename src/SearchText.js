@@ -1,5 +1,3 @@
-// YourComponent.js
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import useApiSearch from './useApiSearch';
@@ -43,9 +41,14 @@ const SearchIcon = styled.img`
   cursor: pointer;
 `;
 
-const YourComponent = () => {
+const Search = ({ onInputChange }) => {
   const [inputValue, setInputValue] = useState('');
   const { searchResult, loading, error } = useApiSearch(inputValue);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    onInputChange(e.target.value); // 부모 컴포넌트에 변경사항 알림
+  };
 
   return (
     <PillTextBoxContainer>
@@ -54,11 +57,11 @@ const YourComponent = () => {
         id="input"
         placeholder="검색어를 입력하세요"
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={handleInputChange}
       />
       <SearchIcon src={searchIcon} alt="Search" />
     </PillTextBoxContainer>
   );
 };
 
-export default YourComponent;
+export default Search;

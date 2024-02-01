@@ -1,7 +1,8 @@
 // PillTextBox.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import searchIcon from './searchIcon.svg';
+import useSearch from './useSearch.js';
 
 const PillTextBoxContainer = styled.div`
   margin-top: 6px;
