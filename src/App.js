@@ -18,6 +18,7 @@ import {
   Mid,
   BookmarkListDiv,
   Blank,
+  HeaderIcon,
 } from './StyledComponents';
 
 const App = () => {
@@ -27,7 +28,6 @@ const App = () => {
     loading,
     error,
     handleChange,
-    handleSearchClick,
     handleKeyDown,
   } = useSearch();
 
@@ -43,25 +43,20 @@ const App = () => {
     setDivVisible(!divVisible);
   };
 
-  const [scrollOffset, setScrollOffset] = useState(0);
-
   const handleButtonClick = () => {
-    // 버튼을 눌렀을 때 스크롤을 일정 픽셀만큼 이동 또는 처음으로 돌아오기
-    const newOffset = (scrollOffset + 200) % 400;
-    setScrollOffset(newOffset);
-    console.log("버튼클릭");
   };
 
   return (
     <div>
       <Head>
-        <HeadTop></HeadTop>
+        <HeadTop>
+          <HeaderIcon />
+        </HeadTop>
         <HeadBottom>
           <HeadBottom1>
             <PillTextBox
               value={searchValue}
               onChange={handleChange}
-              onEnter={handleKeyDown}
             />
             <Toggle />
           </HeadBottom1>

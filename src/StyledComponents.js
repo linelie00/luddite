@@ -1,32 +1,37 @@
 // StyledComponents.js
 import styled from 'styled-components';
+import headerIcon from './headerIcon.svg';
 
 export const Head = styled.div`
-  width: 99%;
+  width: 100%;
   height: 250px;
-  background-color: #ffffff;
-  margin: 5px;
+  //background-color: #999999;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  //overflow: hidden;
 `;
 
 export const HeadTop = styled.div`
   margin-left: auto;
   margin-right: auto;
-  background-color: #888888;
-  width: 98%;
-  height: 40%;
+  padding: 0 20px;
+  //background-color: #888888;
+  width: 96%;
+  height: 50%;
   margin: 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row; /* 가로로 배치하는 스타일 */
 `;
 
 export const HeadBottom = styled.div`
   margin-left: auto;
   margin-right: auto;
-  background-color: #eeeeee;
+  //background-color: #eeeeee;
   width: 98%;
-  height: 55%;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,6 +44,7 @@ export const HeadBottom1 = styled.div`
   height: 45%;
   overflow: hidden;
   display: flex;
+  margin: 12px 0 0 0;
 `;
 
 export const HeadBottom2 = styled.div`
@@ -54,11 +60,11 @@ export const HeadBottom2 = styled.div`
 export const Mid = styled.div`
   width: 70%;
   min-width: 700px;
-  height: 500px;
+  height: 530px;
   background-color: #eeeeee;
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 5px;
+  //margin: 5px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -69,6 +75,7 @@ export const Divider = styled.div`
   width: 98%;
   height: 3px;
   background-color: #864971;
+  z-index: 17;
 `;
 
 export const PillTextBoxContainer = styled.div`
@@ -218,9 +225,25 @@ export const ClipboardAlert = styled.div`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #8a8a8a;
+  background-color: #9a9a9a;
   color: #fff;
   padding: 10px 20px;
   border-radius: 10px;
   display: inline-block;
+  //font-size: 16px;
+  //font-weight: 600;
+`;
+
+export const HeaderIcon = styled.div`
+  width: 300px;
+  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 10px 0px;
+  //background-color: #999999;
+  background-image: url(${headerIcon});
+  background-size: cover; /* 이미지 크기에 맞춤 */
+  background-position: center; /* 이미지를 가운데 정렬 */
+  background-size: contain; /* 이미지를 최대한 보존하도록 크기 조절 */
+  background-repeat: no-repeat; /* 이미지 반복 제거 */
 `;
