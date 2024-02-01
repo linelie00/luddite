@@ -106,7 +106,7 @@ const useSearch = () => {
         setSearchResult({ pos1: null, pos27: null });
         setError('데이터를 불러오는 중 에러 발생');
       }
-    }, 500);
+    }, 400);
   
     fetchDataWithDebounce();
 
