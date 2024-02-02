@@ -19,12 +19,18 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
     }
   };
 
-  const removeHtmlTagsAndString = (htmlString, stringToRemove) => {
+  const removeHtmlTagsAndString = (htmlString) => {
     const doc = new DOMParser().parseFromString(htmlString, 'text/html');
     let textContent = doc.body.textContent || "";
-    textContent = textContent.replace(stringToRemove, '');
+    // <FL> 및 </FL> 문자열 제거
     textContent = textContent.replace(/<FL>|<\/FL>|<DR \/>|<\/sub>|<sub>/g, '');
-    return textContent;
+    return decodeEntities(textContent);
+  };
+
+  const decodeEntities = (html) => {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
   };
 
   const handleCopyToClipboard = (word) => {
@@ -41,7 +47,7 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
 
   const renderResultItem = (item, index) => {
     const modifiedWord = item.word.replace(/-/g, '');
-
+  
     return (
       <ResultItemContainer key={index}>
         <button className="bookmarkButton" onClick={() => handleBookmarkClick(item.word)}>
@@ -58,7 +64,7 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
         <div className="meaningDiv">
           {item.sense.map((meaning, senseIndex) => (
             <div key={senseIndex}>
-              <p>: {removeHtmlTagsAndString(meaning.definition, '<FL>')}</p>
+              <p>: {removeHtmlTagsAndString(meaning.definition)}</p>
               <a href={meaning.link} target="_blank" rel="noopener noreferrer">
                 더 알아보기
               </a>
