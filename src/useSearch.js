@@ -30,7 +30,6 @@ const useSearch = () => {
           sort: 'popular',
           start: 1,
           num: 100,
-          letter_s: 2,
         };
 
         const queryString = Object.keys(parameters)
