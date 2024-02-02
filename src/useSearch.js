@@ -17,10 +17,9 @@ const useSearch = () => {
         const apiKey = "C956A2407AF0A3C67401DA0B27201261";
 
         const parameters = {
-          certkey_no: 6136,
           key: apiKey,
           advanced: 'y',
-          type1: 'word',
+          type1: 'word,phrase',
           pos: pos,
           method: 'start',
           target_type: 'search',
@@ -30,7 +29,6 @@ const useSearch = () => {
           sort: 'popular',
           start: 1,
           num: 100,
-          letter_s: 2,
         };
 
         const queryString = Object.keys(parameters)
@@ -38,6 +36,8 @@ const useSearch = () => {
           .join('&');
 
         const url = `http://localhost:3000/api/search?${queryString}`;
+
+        console.log(`API 호출 URL: ${url}`);
 
         const response = await axios.get(url);
 
@@ -106,7 +106,7 @@ const useSearch = () => {
         setSearchResult({ pos1: null, pos27: null });
         setError('데이터를 불러오는 중 에러 발생');
       }
-    }, 500);
+    }, 400);
   
     fetchDataWithDebounce();
 

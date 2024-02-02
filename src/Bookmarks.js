@@ -63,18 +63,21 @@ const Bookmarks = ({ bookmarks, updateBookmarks }) => {
 
   return (
     <BookmarksContainer>
-      {bookmarks.map((word, index) => (
-        <BookmarkItem
-          key={index}
-          draggable
-          onDragStart={() => handleDragStart(index)}
-          onDragOver={() => handleDragOver(index)}
-          onDragEnd={handleDragEnd}
-        >
-        <CircleIcon />
-        <WordText>{word}</WordText>
-        </BookmarkItem>
-      ))}
+      {bookmarks.map((word, index) => {
+        const modifiedWord = word.replace(/-/g, ''); // 단어에서 "-"를 제거
+        return (
+          <BookmarkItem
+            key={index}
+            draggable
+            onDragStart={() => handleDragStart(index)}
+            onDragOver={() => handleDragOver(index)}
+            onDragEnd={handleDragEnd}
+          >
+            <CircleIcon />
+            <WordText>{modifiedWord}</WordText>
+          </BookmarkItem>
+        );
+      })}
     </BookmarksContainer>
   );
 };
