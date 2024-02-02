@@ -17,10 +17,9 @@ const useSearch = () => {
         const apiKey = "C956A2407AF0A3C67401DA0B27201261";
 
         const parameters = {
-          certkey_no: 6136,
           key: apiKey,
           advanced: 'y',
-          type1: 'word',
+          type1: 'word,phrase',
           pos: pos,
           method: 'start',
           target_type: 'search',
@@ -37,6 +36,8 @@ const useSearch = () => {
           .join('&');
 
         const url = `http://localhost:3000/api/search?${queryString}`;
+
+        console.log(`API 호출 URL: ${url}`);
 
         const response = await axios.get(url);
 

@@ -46,7 +46,7 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
   const pos27Results = searchResult?.pos27?.channel?.item || [];
 
   const renderResultItem = (item, index) => {
-    const modifiedWord = item.word.replace(/-/g, '');
+    const modifiedWord = item.word.replace(/[-^]/g, '');
   
     return (
       <ResultItemContainer key={index}>
