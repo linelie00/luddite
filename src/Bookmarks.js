@@ -64,7 +64,7 @@ const Bookmarks = ({ bookmarks, updateBookmarks }) => {
   return (
     <BookmarksContainer>
       {bookmarks.map((word, index) => {
-        const modifiedWord = word.replace(/-/g, ''); // 단어에서 "-"를 제거
+        const modifiedWord = word.replace(/[-^]/g, ''); // 단어에서 "-"를 제거
         return (
           <BookmarkItem
             key={index}
