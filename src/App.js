@@ -1,6 +1,6 @@
 // App.js
 import React, { useState } from 'react';
-import Toggle from './Toggle.js';
+import Toggle from './MethodToggle.js';
 import PillTextBox from './search.js';
 import MeatballButton from './MeatballButton';
 import MeatballDiv from './MeatballDiv';
@@ -29,6 +29,7 @@ const App = () => {
     error,
     handleChange,
     handleKeyDown,
+    handleToggle,
   } = useSearch();
 
   const [bookmarks, setBookmarks] = useState([]);
@@ -58,7 +59,7 @@ const App = () => {
               value={searchValue}
               onChange={handleChange}
             />
-            <Toggle />
+             <Toggle />
           </HeadBottom1>
           <Divider></Divider>
           <HeadBottom2>
