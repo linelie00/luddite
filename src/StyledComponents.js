@@ -59,7 +59,7 @@ export const HeadBottom2 = styled.div`
 
 export const Mid = styled.div`
   width: 70%;
-  min-width: 700px;
+  min-width: 480px;
   height: 530px;
   background-color: #eeeeee;
   overflow-y: auto;
@@ -158,20 +158,6 @@ export const ResultItemContainer = styled.div`
     margin: 0;
   }
 
-  button {
-    position: relative; /* 위치를 상대적으로 설정 */
-    left: 88%; /* 기본 상태에서 왼쪽으로 10px 이동 */
-    top: 38px;
-    width: 40px;
-    height: 40px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-  }
-  
   .bookmarkButton {
     position: relative;
     left: 88%;
@@ -184,6 +170,9 @@ export const ResultItemContainer = styled.div`
     border: none;
     cursor: pointer;
     background-color: transparent;
+    @media screen and (max-width: 800px) {
+      left: 85%;
+    }
   }
 
   .copyButton {
@@ -198,6 +187,9 @@ export const ResultItemContainer = styled.div`
     border: none;
     cursor: pointer;
     background-color: transparent;
+    @media screen and (max-width: 800px) {
+      left: 86%;
+    }
   }
 
   button img {
