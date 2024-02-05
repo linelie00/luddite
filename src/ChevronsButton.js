@@ -7,6 +7,13 @@ const ButtonContainer = styled.div`
   z-index: 18;
   left: 94%;
   position: absolute;
+
+  @media screen and (max-width: 1000px) {
+    left: 90%;
+  }
+  @media screen and (max-width: 800px) {
+    left: 89%;
+  }
 `;
 
 const ToggleButton = styled.button`

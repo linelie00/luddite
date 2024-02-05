@@ -10,7 +10,7 @@ export const Head = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  //overflow: hidden;
+  overflow: hidden;
 `;
 
 export const HeadTop = styled.div`
@@ -121,7 +121,6 @@ export const BookmarkListDiv = styled.div`
   overflow-y: hidden;
   overflow-x: auto;
   margin: 0;
-  /* 추가된 부분 */
   > * {
     flex-shrink: 0;
   }
@@ -138,6 +137,9 @@ export const BookmarkListDiv = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: transparent; /* 스크롤 바 색상을 투명으로 설정 */
   }
+  @media screen and (max-width: 1000px) {
+    width: 88%;
+}
 `;
 
 //북마크 목록 뒤 공간

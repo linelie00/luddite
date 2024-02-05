@@ -23,6 +23,8 @@ import {
 
 const App = () => {
 
+  const [bookmarks, setBookmarks] = useState([]);
+  const [divVisible, setDivVisible] = useState(false);
   const [toggleState, setToggleState] = useState(0); // 추가: toggleState 상태 추가
 
   const {
@@ -31,16 +33,13 @@ const App = () => {
     loading,
     error,
     handleChange,
-    handleKeyDown,
   } = useSearch({ method: toggleState === 0 ? 'start' : 'end' });
 
-  const [bookmarks, setBookmarks] = useState([]);
 
   const updateBookmarks = (newBookmarks) => {
     setBookmarks(newBookmarks);
   };
 
-  const [divVisible, setDivVisible] = useState(false);
 
   const toggleDiv = () => {
     setDivVisible(!divVisible);
