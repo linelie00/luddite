@@ -34,9 +34,12 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
   };
 
   const handleCopyToClipboard = (word) => {
-    copy(word);
+    // '-' 및 '^' 문자를 제거한 후 클립보드에 복사
+    const modifiedWord = word.replace(/[-^]/g, '');
+    copy(modifiedWord);
+    
     setClipboardAlert('클립보드에 복사되었습니다');
-
+  
     setTimeout(() => {
       setClipboardAlert(null);
     }, 1000);
@@ -93,20 +96,26 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
     );
   };
 
+  const renderResult = (items) => {
+    return items.map((item, index) => renderResultItem(item, index));
+  };
+
   return (
     <div>
       {clipboardAlert && <ClipboardAlert>{clipboardAlert}</ClipboardAlert>}
-
+  
       {renderBookmarks()}
-
-      {filteredPos1Results.map((item, index) => renderResultItem(item, index))}
-      {filteredPos27Results.map((item, index) => renderResultItem(item, index))}
-
-      {(!filteredPos1Results || filteredPos1Results.length === 0) && (!filteredPos27Results || filteredPos27Results.length === 0) && (
-        <div>결과가 없습니다.</div>
+  
+      {(filteredPos1Results.length > 0 || filteredPos27Results.length > 0) ? (
+        <div>
+          {renderResult(filteredPos1Results)}
+          {renderResult(filteredPos27Results)}
+        </div>
+      ) : (
+        bookmarks.length === 0 && <div>결과가 없습니다.</div>
       )}
     </div>
-  );
+  );  
 };
 
 export default SearchResultDisplay;

@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import listIcon from './listIcon.svg';
 
 const ButtonContainer = styled.div`
-    left: 92.5%;
+    left: 92%;
     top: 20px;
     position: absolute;
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1200px) {
+        left: 91%;
+      }
+      @media screen and (max-width: 1000px) {
         left: 90%;
       }
     @media screen and (max-width: 800px) {
