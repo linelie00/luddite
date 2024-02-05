@@ -15,6 +15,9 @@ const PillTextBoxContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0 55px;
+  @media screen and (max-width: 600px) {
+    width: 50%;
+  }
 `;
 
 const PillTextBoxInput = styled.input`

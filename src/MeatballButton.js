@@ -8,6 +8,10 @@ const ButtonContainer = styled.div`
     z-index: 20; /* 버튼을 상위로 올림 */
     left: 97%;
     position: absolute;
+
+    @media screen and (max-width: 1000px) {
+        left: 94%;
+    }
 `;
 
 const ToggleButton = styled.button`

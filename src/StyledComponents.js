@@ -10,7 +10,7 @@ export const Head = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  //overflow: hidden;
+  overflow: hidden;
 `;
 
 export const HeadTop = styled.div`
@@ -24,6 +24,9 @@ export const HeadTop = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: row; /* 가로로 배치하는 스타일 */
+  @media screen and (max-height: 400px) {
+    height: 0%;
+  }
 `;
 
 export const HeadBottom = styled.div`
@@ -59,7 +62,7 @@ export const HeadBottom2 = styled.div`
 
 export const Mid = styled.div`
   width: 70%;
-  min-width: 700px;
+  min-width: 480px;
   height: 530px;
   background-color: #eeeeee;
   overflow-y: auto;
@@ -121,7 +124,6 @@ export const BookmarkListDiv = styled.div`
   overflow-y: hidden;
   overflow-x: auto;
   margin: 0;
-  /* 추가된 부분 */
   > * {
     flex-shrink: 0;
   }
@@ -138,6 +140,9 @@ export const BookmarkListDiv = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: transparent; /* 스크롤 바 색상을 투명으로 설정 */
   }
+  @media screen and (max-width: 1000px) {
+    width: 88%;
+}
 `;
 
 //북마크 목록 뒤 공간
@@ -156,20 +161,6 @@ export const ResultItemContainer = styled.div`
     margin: 0;
   }
 
-  button {
-    position: relative; /* 위치를 상대적으로 설정 */
-    left: 88%; /* 기본 상태에서 왼쪽으로 10px 이동 */
-    top: 38px;
-    width: 40px;
-    height: 40px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-  }
-  
   .bookmarkButton {
     position: relative;
     left: 88%;
@@ -182,6 +173,10 @@ export const ResultItemContainer = styled.div`
     border: none;
     cursor: pointer;
     background-color: transparent;
+    user-select: none;
+    @media screen and (max-width: 800px) {
+      left: 85%;
+    }
   }
 
   .copyButton {
@@ -196,6 +191,10 @@ export const ResultItemContainer = styled.div`
     border: none;
     cursor: pointer;
     background-color: transparent;
+    user-select: none;
+    @media screen and (max-width: 800px) {
+      left: 86%;
+    }
   }
 
   button img {

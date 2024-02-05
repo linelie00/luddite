@@ -1,6 +1,6 @@
 // App.js
 import React, { useState } from 'react';
-import Toggle from './Toggle.js';
+import Toggle from './MethodToggle.js';
 import PillTextBox from './search.js';
 import MeatballButton from './MeatballButton';
 import MeatballDiv from './MeatballDiv';
@@ -22,22 +22,24 @@ import {
 } from './StyledComponents';
 
 const App = () => {
+
+  const [bookmarks, setBookmarks] = useState([]);
+  const [divVisible, setDivVisible] = useState(false);
+  const [toggleState, setToggleState] = useState(0); // 추가: toggleState 상태 추가
+
   const {
     searchValue,
     searchResult,
     loading,
     error,
     handleChange,
-    handleKeyDown,
-  } = useSearch();
+  } = useSearch({ method: toggleState === 0 ? 'start' : 'end' });
 
-  const [bookmarks, setBookmarks] = useState([]);
 
   const updateBookmarks = (newBookmarks) => {
     setBookmarks(newBookmarks);
   };
 
-  const [divVisible, setDivVisible] = useState(false);
 
   const toggleDiv = () => {
     setDivVisible(!divVisible);
@@ -45,6 +47,11 @@ const App = () => {
 
   const handleButtonClick = () => {
   };
+
+  const handleToggle = () => {
+    setToggleState((prevToggleState) => (prevToggleState + 1) % 2);
+  };
+
 
   return (
     <div>
@@ -58,7 +65,7 @@ const App = () => {
               value={searchValue}
               onChange={handleChange}
             />
-            <Toggle />
+             <Toggle onToggle={handleToggle} />
           </HeadBottom1>
           <Divider></Divider>
           <HeadBottom2>
