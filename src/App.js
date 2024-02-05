@@ -22,6 +22,9 @@ import {
 } from './StyledComponents';
 
 const App = () => {
+
+  const [toggleState, setToggleState] = useState(0); // 추가: toggleState 상태 추가
+
   const {
     searchValue,
     searchResult,
@@ -29,8 +32,7 @@ const App = () => {
     error,
     handleChange,
     handleKeyDown,
-    handleToggle,
-  } = useSearch();
+  } = useSearch({ method: toggleState === 0 ? 'start' : 'end' });
 
   const [bookmarks, setBookmarks] = useState([]);
 
@@ -47,6 +49,11 @@ const App = () => {
   const handleButtonClick = () => {
   };
 
+  const handleToggle = () => {
+    setToggleState((prevToggleState) => (prevToggleState + 1) % 2);
+  };
+
+
   return (
     <div>
       <Head>
@@ -59,7 +66,7 @@ const App = () => {
               value={searchValue}
               onChange={handleChange}
             />
-             <Toggle />
+             <Toggle onToggle={handleToggle} />
           </HeadBottom1>
           <Divider></Divider>
           <HeadBottom2>

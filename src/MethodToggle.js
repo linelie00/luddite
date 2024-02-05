@@ -8,12 +8,12 @@ const ToggleContainer = styled.div`
   cursor: pointer;
 
   > .toggle-container {
-    width: 98px;
+    width: 90px;
     height: 44px;
     border-radius: 100px;
     background-color: ${({ toggleState }) => (toggleState === 0 ? '#e9e9e9' : '#AD839F')};
     border-style: solid;
-    border-color: ${({ toggleState }) => (toggleState === 0 ? '#AD839F' : '#864971')};
+    border-color: ${({ toggleState }) => (toggleState === 0 ? '#B3B3B3' : '#864971')};
     border-width: 3.5px;
     display: flex;
     align-items: center;
@@ -27,11 +27,13 @@ const ToggleContainer = styled.div`
   }
 `;
 
-const Toggle = () => {
+const Toggle = ({ onToggle }) => {
   const [toggleState, setToggleState] = useState(0);
 
   const toggleHandler = () => {
-    setToggleState((toggleState + 1) % 2);
+    setToggleState((prevToggleState) => (prevToggleState + 1) % 2);
+    // Call different methods based on toggleState
+    onToggle(toggleState === 0 ? 'start' : 'end');
   };
 
   return (

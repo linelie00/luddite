@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const useSearch = () => {
+const useSearch = ({ method }) => {
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState({ pos1: null, pos27: null });
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ const useSearch = () => {
           advanced: 'y',
           type1: 'word,phrase',
           pos: pos,
-          method: 'start',
+          method: method,
           target_type: 'search',
           req_type: 'json',
           part: 'word',
@@ -57,7 +57,7 @@ const useSearch = () => {
         setLoading(false);
       }
     },
-    [searchValue]
+    [searchValue, method]
   );
 
   const isHangul = (text) => {
