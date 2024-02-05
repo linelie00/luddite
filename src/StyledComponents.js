@@ -24,6 +24,9 @@ export const HeadTop = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: row; /* 가로로 배치하는 스타일 */
+  @media screen and (max-height: 400px) {
+    height: 0%;
+  }
 `;
 
 export const HeadBottom = styled.div`
@@ -170,6 +173,7 @@ export const ResultItemContainer = styled.div`
     border: none;
     cursor: pointer;
     background-color: transparent;
+    user-select: none;
     @media screen and (max-width: 800px) {
       left: 85%;
     }
@@ -187,6 +191,7 @@ export const ResultItemContainer = styled.div`
     border: none;
     cursor: pointer;
     background-color: transparent;
+    user-select: none;
     @media screen and (max-width: 800px) {
       left: 86%;
     }
