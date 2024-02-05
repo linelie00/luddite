@@ -20,7 +20,7 @@ export const HeadTop = styled.div`
   //background-color: #888888;
   width: 96%;
   height: 50%;
-  margin: 2px;
+  margin-top: 2px;
   overflow: hidden;
   display: flex;
   flex-direction: row; /* 가로로 배치하는 스타일 */
