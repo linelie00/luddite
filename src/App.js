@@ -8,6 +8,8 @@ import useSearch from './useSearch';
 import SearchResultDisplay from './SearchResultDisplay';
 import Bookmarks from './Bookmarks';
 import ChevronsButton from './ChevronsButton';
+import ListButton from './ListButton';
+import UserIcon from './UserButton';
 import {
   Head,
   HeadTop,
@@ -58,6 +60,8 @@ const App = () => {
       <Head>
         <HeadTop>
           <HeaderIcon />
+          <ListButton />
+          <UserIcon />
         </HeadTop>
         <HeadBottom>
           <HeadBottom1>

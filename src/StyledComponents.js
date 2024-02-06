@@ -20,7 +20,7 @@ export const HeadTop = styled.div`
   //background-color: #888888;
   width: 96%;
   height: 50%;
-  margin: 2px;
+  margin-top: 2px;
   overflow: hidden;
   display: flex;
   flex-direction: row; /* 가로로 배치하는 스타일 */
@@ -245,4 +245,10 @@ export const HeaderIcon = styled.div`
   background-position: center; /* 이미지를 가운데 정렬 */
   background-size: contain; /* 이미지를 최대한 보존하도록 크기 조절 */
   background-repeat: no-repeat; /* 이미지 반복 제거 */
+`;
+
+export const NoResultContainer = styled.div`
+  color: #864971;
+  margin: 20px 0 0 20px;
+  font-size: 20px;
 `;
