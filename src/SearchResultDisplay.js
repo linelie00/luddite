@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FilterHangulWords from './FilterHangulWords';
-import { ResultItemContainer, ClipboardAlert } from './StyledComponents';
+import { ResultItemContainer, ClipboardAlert, NoResultContainer, } from './StyledComponents';
 import emptystarIcon from './emptystarIcon.svg';
 import fullstarIcon from './fullstarIcon.svg';
 import copyIcon from './copyIcon.svg';
@@ -107,7 +107,7 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
       {filteredPos27Results.map((item, index) => renderResultItem(item, index))}
 
       {(pos1Results.length === 0 && pos27Results.length === 0) && (
-      <div>결과가 없습니다.</div>
+      <NoResultContainer>결과가 없습니다.</NoResultContainer>
       )}
     </div>
   );

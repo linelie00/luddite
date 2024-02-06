@@ -246,3 +246,9 @@ export const HeaderIcon = styled.div`
   background-size: contain; /* 이미지를 최대한 보존하도록 크기 조절 */
   background-repeat: no-repeat; /* 이미지 반복 제거 */
 `;
+
+export const NoResultContainer = styled.div`
+  color: #864971;
+  margin: 20px 0 0 20px;
+  font-size: 20px;
+`;
