@@ -106,8 +106,8 @@ const SearchResultDisplay = ({ searchResult, loading, error, bookmarks, updateBo
       {filteredPos1Results.map((item, index) => renderResultItem(item, index))}
       {filteredPos27Results.map((item, index) => renderResultItem(item, index))}
 
-      {(!filteredPos1Results || filteredPos1Results.length === 0) && (!filteredPos27Results || filteredPos27Results.length === 0) && (
-        <div>결과가 없습니다.</div>
+      {(pos1Results.length === 0 && pos27Results.length === 0) && (
+      <div>결과가 없습니다.</div>
       )}
     </div>
   );
