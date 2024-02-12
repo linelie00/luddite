@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { forwardRef } from 'react';
 
-export const BookmarkListDiv = styled.div`
+const BookmarkListDiv = styled.div`
   flex-wrap: nowrap;
   white-space: nowrap;
   display: flex;
