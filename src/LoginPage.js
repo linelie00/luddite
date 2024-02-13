@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'; // react-router-dom에서 Link import
+import {
+  HeaderIcon,
+} from './StyledComponents';
 
 // 스타일 컴포넌트 정의
 const LoginContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  height: 90vh;
 `;
 
 const LoginFormContainer = styled.div`
@@ -15,6 +19,7 @@ const LoginFormContainer = styled.div`
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-top: 10px;
 `;
 
 const FormGroup = styled.div`
@@ -46,11 +51,11 @@ const SubmitButton = styled.button`
   font-size: 14px;
 
   &:hover {
-    background-color: #AD839F;
+    background-color: #ad839f;
   }
 `;
 
-const SignUpLink = styled(Link)` // 스타일 컴포넌트로 Link 컴포넌트 스타일링
+const SignUpLink = styled(Link)`
   display: block;
   text-align: center;
   margin-top: 10px;
@@ -65,6 +70,9 @@ const SignUpLink = styled(Link)` // 스타일 컴포넌트로 Link 컴포넌트 
 const LoginForm = () => {
   return (
     <LoginContainer>
+          <Link to="/">
+            <HeaderIcon />
+          </Link>
       <LoginFormContainer>
         <form>
           <FormGroup>
