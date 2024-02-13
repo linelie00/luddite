@@ -219,6 +219,75 @@ export const ResultItemContainer = styled.div`
   }
 `;
 
+export const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  height: 100vh; /* 화면 높이의 100% */
+  color: #864971;
+  h3 {
+    color: #864971;
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .bookmarkButton {
+    position: relative;
+    left: 88%;
+    top: 38px;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    user-select: none;
+    @media screen and (max-width: 800px) {
+      left: 85%;
+    }
+  }
+
+  .copyButton {
+    position: relative;
+    left: 89%;
+    top: 40px;
+    width: 42px;
+    height: 42px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    user-select: none;
+    @media screen and (max-width: 800px) {
+      left: 86%;
+    }
+  }
+
+  button img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .meaningDiv {
+    width: 80%;
+  }
+
+  p {
+    color: #864971;
+  }
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 5px;
+    display: block;
+  }
+`;
+
 export const ClipboardAlert = styled.div`
   position: fixed;
   bottom: 20px;
