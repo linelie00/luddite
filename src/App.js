@@ -1,5 +1,5 @@
 // App.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Toggle from './MethodToggle.js';
 import PillTextBox from './search.js';
 import MeatballButton from './MeatballButton';
