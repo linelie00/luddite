@@ -9,7 +9,7 @@ import SearchResultDisplay from './SearchResultDisplay';
 import Bookmarks from './Bookmarks';
 import ChevronsButton from './ChevronsButton';
 import ListButton from './ListButton';
-import UserIcon from './UserButton';
+import UserButton from './UserButton';
 import {
   Head,
   HeadTop,
@@ -61,7 +61,7 @@ const App = () => {
         <HeadTop>
           <HeaderIcon />
           <ListButton />
-          <UserIcon />
+          <UserButton />
         </HeadTop>
         <HeadBottom>
           <HeadBottom1>
