@@ -1,4 +1,5 @@
-## Ruddite Purple
+## Luddite Purple
+React App
 
 ### 앞으로 해야 할 과제
 1. 북마크 연동
