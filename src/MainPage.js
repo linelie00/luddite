@@ -1,5 +1,5 @@
 // MainPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Toggle from './MethodToggle.js';
 import PillTextBox from './search.js';
@@ -11,19 +11,8 @@ import Bookmarks from './Bookmarks';
 import ChevronsButton from './ChevronsButton';
 import ListButton from './ListButton';
 import UserButton from './UserButton';
-import {
-  Head,
-  HeadTop,
-  HeadBottom,
-  HeadBottom1,
-  HeadBottom2,
-  Divider,
-  Mid,
-  BookmarkListDiv,
-  Blank,
-  HeaderIcon,
-} from './StyledComponents';
-
+import { Head, HeadTop, HeadBottom, HeadBottom1, HeadBottom2, Divider, Mid, BookmarkListDiv, Blank, HeaderIcon } from './StyledComponents';
+import { useAuth } from './AuthProvider';
 const MainPage = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [divVisible, setDivVisible] = useState(false);
@@ -57,9 +46,7 @@ const MainPage = () => {
         <HeadTop>
           <HeaderIcon />
           <ListButton />
-          <Link to="/login">
-            <UserButton />
-          </Link>
+              <UserButton />
         </HeadTop>
         <HeadBottom>
           <HeadBottom1>
