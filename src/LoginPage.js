@@ -20,6 +20,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setErrorMessage(""); // 폼 제출 시 에러 메시지 초기화
         const formData = new FormData(event.target);
         const id = formData.get('id');
         const pw = formData.get('pw');
@@ -62,8 +63,8 @@ const LoginForm = () => {
                     <SubmitButton type="submit">로그인</SubmitButton>
                     <UserLink to="/signup">회원가입</UserLink>
                 </form>
-                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>} {/* 에러 메시지 표시 */}
             </UserFormContainer>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </UserContainer>
     );
 };
