@@ -47,15 +47,7 @@ const MainPage = () => {
         <HeadTop>
           <HeaderIcon />
           <ListButton />
-          {isLoggedIn ? (
-            <Link to="/user"> {/* If logged in, redirect to /user */}
               <UserButton />
-            </Link>
-          ) : (
-            <Link to="/login">
-              <UserButton />
-            </Link>
-          )}
         </HeadTop>
         <HeadBottom>
           <HeadBottom1>
