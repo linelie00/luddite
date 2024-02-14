@@ -1,5 +1,5 @@
 // MainPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Toggle from './MethodToggle.js';
 import PillTextBox from './search.js';
@@ -17,7 +17,6 @@ const MainPage = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [divVisible, setDivVisible] = useState(false);
   const [toggleState, setToggleState] = useState(0);
-  const { isLoggedIn } = useAuth(); // Use the useAuth hook to get the login status
 
   const {
     searchValue,
