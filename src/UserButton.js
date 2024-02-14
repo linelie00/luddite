@@ -96,7 +96,10 @@ const UserButton = () => {
             <LogoutButton onClick={logout}>로그아웃</LogoutButton>
           </>
         ) : (
-          <Tab to="/login">로그인</Tab>
+          <>
+            <Tab to="/login">로그인</Tab>
+            <Tab to="/signup">회원가입</Tab>
+          </>
         )}
       </TabsContainer>
     </ButtonContainer>
