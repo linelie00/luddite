@@ -33,7 +33,7 @@ const TabsContainer = styled.div`
   top: calc(100% + 5px);
   right: 0;
   display: ${(props) => (props.isVisible ? 'block' : 'none')};
-  width: 100px;
+  width: 120px;
   background-color: #ffffff;
   border-radius: 3px;
   //box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
@@ -48,9 +48,10 @@ const Tab = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   padding-right: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-radius: 3px;
+  font-size: 14px;
   font-weight: 600;
   &:hover {
     background-color: #F2F2F2;
@@ -60,15 +61,16 @@ const Tab = styled(Link)`
 
 const LogoutButton = styled.span`
   display: block;
-  padding: 5px 0; /* Adjust padding */
-  text-align: right; /* Right align text */
+  padding: 5px 0;
+  text-align: right;
   color: #864971;
   text-decoration: none;
   cursor: pointer;
   padding-right: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-radius: 3px;
+  font-size: 14px;
   font-weight: 600;
   &:hover {
     background-color: #F2F2F2;

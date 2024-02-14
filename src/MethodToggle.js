@@ -13,7 +13,7 @@ const ToggleContainer = styled.div`
     border-radius: 100px;
     background-color: ${({ toggleState }) => (toggleState === 0 ? '#e9e9e9' : '#AD839F')};
     border-style: solid;
-    border-color: ${({ toggleState }) => (toggleState === 0 ? '#B3B3B3' : '#864971')};
+    border-color: ${({ toggleState }) => (toggleState === 0 ? '#864971' : '#864971')};
     border-width: 3.5px;
     display: flex;
     align-items: center;
