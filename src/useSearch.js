@@ -14,7 +14,7 @@ const useSearch = ({ method }) => {
         setLoading(true);
         setError(null);
 
-        const apiKey = "C956A2407AF0A3C67401DA0B27201261";
+        const apiKey = process.env.REACT_APP_API_KEY;
 
         const parameters = {
           key: apiKey,
