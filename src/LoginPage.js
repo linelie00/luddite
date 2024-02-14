@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     HeaderIcon,
 } from './StyledComponents';
@@ -16,11 +16,12 @@ import {
 } from './UsersComponents';
 
 const LoginForm = () => {
-    const [errorMessage, setErrorMessage] = useState(""); // 에러 메시지 상태 추가
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setErrorMessage(""); // 폼 제출 시 에러 메시지 초기화
+        setErrorMessage("");
         const formData = new FormData(event.target);
         const id = formData.get('id');
         const pw = formData.get('pw');
@@ -32,15 +33,15 @@ const LoginForm = () => {
             });
             if (response.status === 200) {
                 console.log('로그인 성공');
-                // 로그인 성공 시 처리
+                localStorage.setItem('userId', id);
+                navigate('/');
             }
         } catch (error) {
             console.log('로그인 실패');
-            // 로그인 실패 시 처리
             if (error.response && error.response.data && error.response.data.error) {
-                setErrorMessage(error.response.data.error); // 서버에서 반환한 에러 메시지 설정
+                setErrorMessage(error.response.data.error);
             } else {
-                setErrorMessage("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요."); // 기타 오류 처리
+                setErrorMessage("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
             }
         }
     };
