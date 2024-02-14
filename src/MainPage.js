@@ -11,23 +11,13 @@ import Bookmarks from './Bookmarks';
 import ChevronsButton from './ChevronsButton';
 import ListButton from './ListButton';
 import UserButton from './UserButton';
-import {
-  Head,
-  HeadTop,
-  HeadBottom,
-  HeadBottom1,
-  HeadBottom2,
-  Divider,
-  Mid,
-  BookmarkListDiv,
-  Blank,
-  HeaderIcon,
-} from './StyledComponents';
-
+import { Head, HeadTop, HeadBottom, HeadBottom1, HeadBottom2, Divider, Mid, BookmarkListDiv, Blank, HeaderIcon } from './StyledComponents';
+import { useAuth } from './AuthProvider';
 const MainPage = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [divVisible, setDivVisible] = useState(false);
   const [toggleState, setToggleState] = useState(0);
+  const { isLoggedIn } = useAuth(); // Use the useAuth hook to get the login status
 
   const {
     searchValue,
@@ -57,9 +47,15 @@ const MainPage = () => {
         <HeadTop>
           <HeaderIcon />
           <ListButton />
-          <Link to="/login">
-            <UserButton />
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/user"> {/* If logged in, redirect to /user */}
+              <UserButton />
+            </Link>
+          ) : (
+            <Link to="/login">
+              <UserButton />
+            </Link>
+          )}
         </HeadTop>
         <HeadBottom>
           <HeadBottom1>
