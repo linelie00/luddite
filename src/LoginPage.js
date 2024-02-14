@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     HeaderIcon,
 } from './StyledComponents';
@@ -12,53 +12,62 @@ import {
     Input,
     SubmitButton,
     UserLink,
+    ErrorMessage,
 } from './UsersComponents';
 
 const LoginForm = () => {
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
-      event.preventDefault();
-      const formData = new FormData(event.target);
-      const id = formData.get('id');
-      const pw = formData.get('pw');
-      
-      try {
-        const response = await axios.post('http://localhost:8282/use/login', {
-          id,
-          pw
-        });
-        if (response.status === 200) {
-            console.log('로그인 성공');
-          // 로그인 성공 시 처리
-        } else {
+        event.preventDefault();
+        setErrorMessage("");
+        const formData = new FormData(event.target);
+        const id = formData.get('id');
+        const pw = formData.get('pw');
+
+        try {
+            const response = await axios.post('http://localhost:8282/use/login', {
+                id,
+                pw
+            });
+            if (response.status === 200) {
+                console.log('로그인 성공');
+                localStorage.setItem('userId', id);
+                navigate('/');
+            }
+        } catch (error) {
             console.log('로그인 실패');
-          // 로그인 실패 시 처리
+            if (error.response && error.response.data && error.response.data.error) {
+                setErrorMessage(error.response.data.error);
+            } else {
+                setErrorMessage("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+            }
         }
-      } catch (error) {
-        console.error('Error:', error);
-      }
     };
-  
+
     return (
-      <UserContainer>
-        <Link to="/">
-          <HeaderIcon />
-        </Link>
-        <UserFormContainer>
-          <form onSubmit={handleSubmit}>
-            <FormGroup>
-              <Label htmlFor="username">아이디:</Label>
-              <Input type="text" id="id" name="id" placeholder="아이디를 입력하세요" />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="password">비밀번호:</Label>
-              <Input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요" />
-            </FormGroup>
-            <SubmitButton type="submit">로그인</SubmitButton>
-            <UserLink to="/signup">회원가입</UserLink>
-          </form>
-        </UserFormContainer>
-      </UserContainer>
+        <UserContainer>
+            <Link to="/">
+                <HeaderIcon />
+            </Link>
+            <UserFormContainer>
+                <form onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <Label htmlFor="username">아이디:</Label>
+                        <Input type="text" id="id" name="id" placeholder="아이디를 입력하세요" />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="password">비밀번호:</Label>
+                        <Input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요" />
+                    </FormGroup>
+                    <SubmitButton type="submit">로그인</SubmitButton>
+                    <UserLink to="/signup">회원가입</UserLink>
+                </form>
+            </UserFormContainer>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        </UserContainer>
     );
-  };
-  
-  export default LoginForm;
+};
+
+export default LoginForm;
