@@ -61,3 +61,9 @@ export const UserLink = styled(Link)`
     text-decoration: underline;
   }
 `;
+
+export const ErrorMessage = styled.div`
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+`;
