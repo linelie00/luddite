@@ -5,7 +5,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const login = () => {
+  const login = (id,bookmarks) => {
     // 로그인 처리 로직
     setIsLoggedIn(true);
   };
@@ -13,6 +13,9 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     // 로그아웃 처리 로직
     setIsLoggedIn(false);
+    localStorage.setItem('bookmarks', null);
+    localStorage.removeItem('userId');
+    localStorage.removeItem('bookmarks');
   };
 
   return (
