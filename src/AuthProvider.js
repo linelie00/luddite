@@ -16,9 +16,6 @@ export const AuthProvider = ({ children }) => {
     // 로그아웃 처리 로직
     setIsLoggedIn(false);
     setUserId(null);
-    localStorage.setItem('bookmarks', null);
-    localStorage.removeItem('userId');
-    localStorage.removeItem('bookmarks');
   };
 
   return (

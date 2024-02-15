@@ -39,11 +39,6 @@ const MainPage = () => {
     setToggleState((prevToggleState) => (prevToggleState + 1) % 2);
   };
 
-  // 로그인 성공 시 호출되는 함수
-  const handleLoginSuccess = (bookmarksData) => {
-    setBookmarks(bookmarksData); // 서버에서 받아온 북마크 데이터를 상태에 설정
-  };
-
   useEffect(() => {
     if (isLoggedIn) {
       // 로그인 상태일 때만 로컬스토리지에서 북마크 데이터 가져옴
@@ -80,13 +75,17 @@ const MainPage = () => {
     }
   };
 
+  const handleLogout = () => {
+    setBookmarks([]); // 로그아웃 시 북마크 상태를 빈 배열로 초기화
+  };
+
   return (
     <div>
       <Head>
         <HeadTop>
           <HeaderIcon />
           <ListButton />
-              <UserButton onLoginSuccess={handleLoginSuccess} /> {/* 로그인 성공 시에 handleLoginSuccess 함수 호출 */}
+              <UserButton onLogout={handleLogout} />
         </HeadTop>
         <HeadBottom>
           <HeadBottom1>

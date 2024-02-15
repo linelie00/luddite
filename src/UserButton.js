@@ -78,9 +78,9 @@ const LogoutButton = styled.span`
   }
 `;
 
-const UserButton = () => {
+const UserButton = ({ onLogout }) => {
   const [popupVisible, setPopupVisible] = useState(false);
-  const { isLoggedIn, logout } = useAuth(); // Get login status and logout function
+  const { isLoggedIn, logout } = useAuth();
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible);
@@ -93,7 +93,7 @@ const UserButton = () => {
         {isLoggedIn ? (
           <>
             <Tab to="/user">프로필</Tab>
-            <LogoutButton onClick={logout}>로그아웃</LogoutButton>
+            <LogoutButton onClick={() => { logout(); onLogout(); }}>로그아웃</LogoutButton>
           </>
         ) : (
           <>
