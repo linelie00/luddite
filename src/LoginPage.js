@@ -24,7 +24,7 @@ const LoginForm = () => {
             });
             if (response.status === 200) {
                 console.log('로그인 성공');
-                login(); // 로그인 상태 변경
+                login(id); // 로그인 상태 변경
                 localStorage.setItem('bookmarks', JSON.stringify(response.data.bookmarks));
                 localStorage.setItem('userId', id); // 아이디 저장
                 navigate('/'); // 메인 페이지로 이동
