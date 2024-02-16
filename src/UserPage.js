@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-    HeaderIcon,
-} from './StyledComponents';
+import { useAuth } from './AuthProvider';
+import axios from 'axios';
+import {HeaderIcon} from './StyledComponents';
 import {
     UserContainer,
     UserFormContainer,
