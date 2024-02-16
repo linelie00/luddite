@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     // 로그인 처리 로직
     setIsLoggedIn(true);
     setUserId(userId);
-    setUserName(userName);
+    setUserName(userName.replace(/"/g, ''));
   };
 
   const logout = () => {

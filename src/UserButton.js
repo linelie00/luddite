@@ -122,7 +122,7 @@ const UserButton = ({ onLogout }) => {
         {isLoggedIn ? (
           <>
             <UserContainer>
-              <UserName>{userName.replace(/"/g, '')}</UserName>
+              <UserName>{userName}</UserName>
               <UserId>@{userId}</UserId>
             </UserContainer>
             <Tab to="/user">프로필</Tab>

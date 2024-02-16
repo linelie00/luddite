@@ -14,6 +14,7 @@ import {
 } from './UsersComponents';
 
 const UserForm = () => {
+  const { isLoggedIn, userId, userName } = useAuth();
   return (
     <UserContainer>
         <Link to="/">
