@@ -35,9 +35,10 @@ const TabsContainer = styled.div`
   display: ${(props) => (props.isVisible ? 'flex' : 'none')}; 
   flex-direction: column;
   min-width: 120px;
-  background-color: #864971;
+  background-color: #fff;
   border-radius: 3px;
-  border: 5px solid #864971;
+  border: 3px solid #864971;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
 `;
 
 const UserContainer = styled.div`
@@ -45,8 +46,9 @@ const UserContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5px;
-  background-color: #e9e9e9;
-  padding: 5px;
+  //background-color: #e9e9e9;
+  padding: 5px 8px 5px 8px;
+  //border-radius: 50px;
 `;
 
 const UserName = styled.span`
@@ -64,7 +66,7 @@ const UserId = styled.span`
 const Tab = styled(Link)`
   display: block;
   text-align: right;
-  color: #e9e9e9;
+  color: #864971;
   text-decoration: none;
   cursor: pointer;
   padding: 5px 10px;
@@ -79,7 +81,7 @@ const Tab = styled(Link)`
 const LogoutButton = styled.span`
   display: block;
   text-align: right;
-  color: #e9e9e9;
+  color: #864971;
   text-decoration: none;
   cursor: pointer;
   padding: 5px 10px;
