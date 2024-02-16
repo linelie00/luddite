@@ -5,21 +5,24 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState(null);
 
-  const login = (userId) => {
+  const login = (userId,userName) => {
     // 로그인 처리 로직
     setIsLoggedIn(true);
     setUserId(userId);
+    setUserName(userName);
   };
 
   const logout = () => {
     // 로그아웃 처리 로직
     setIsLoggedIn(false);
     setUserId(null);
+    setUserName(null);
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userId, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, userId, userName, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
