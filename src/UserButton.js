@@ -42,13 +42,27 @@ const TabsContainer = styled.div`
 `;
 
 const UserContainer = styled.div`
+  position: relative; /* 상대 위치 지정 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   //background-color: #e9e9e9;
   padding: 5px 8px 5px 8px;
-  //border-radius: 50px;
+  //border-radius: 5px;
+  
+  /* 회색 선 스타일 */
+  &::after {
+    content: '';
+    position: absolute; /* 절대 위치 지정 */
+    bottom: 0; /* 아래쪽에 배치 */
+    center: 0; /* 왼쪽에 배치 */
+    width: 80%; /* 가로폭을 100%로 설정하여 컨테이너의 가로폭과 동일하게 */
+    height: 2px; /* 선의 높이 설정 */
+    background-color: #864971; /* 회색 배경색 설정 */
+    border-radius: 2px; /* 둥근 테두리 설정 */
+    content: ''; /* 가상 요소에 내용 없음 */
+  }
 `;
 
 const UserName = styled.span`
