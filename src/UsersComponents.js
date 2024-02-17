@@ -67,3 +67,8 @@ export const ErrorMessage = styled.div`
     margin-top: 10px;
     font-size: 14px;
 `;
+
+export const Divider = styled.div`
+  margin: 20px 0;
+  border-top: 1px solid #ccc;
+`;
