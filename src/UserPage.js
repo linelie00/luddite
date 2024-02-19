@@ -159,6 +159,7 @@ const ModalContent = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 100%;
+  text-align: right;
 `;
 
 
@@ -168,13 +169,15 @@ const EditProfileForm = () => {
   const [idErrorMessage, setIdErrorMessage] = useState("");
   const [nameErrorMessage, setNameErrorMessage] = useState("");
   const [pwErrorMessage, setPwErrorMessage] = useState("");
+  const [currentPwErrorMessage, setCurrentPwErrorMessage] = useState("");
+  const [newPwErrorMessage, setNewPwErrorMessage] = useState("");
+  const [confirmPwErrorMessage, setConfirmPwErrorMessage] = useState("");
   const [inputId, setInputId] = useState(userId);
   const [inputName, setInputName] = useState(userName);
   const [inputPw, setInputPw] = useState("");
+  const [inputNewPw, setInputNewPw] = useState("");
+  const [inputConfirmPw, setInputConfirmPw] = useState("");
   const [checkId, setCheckId] = useState(true);
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
   useEffect(() => {
@@ -215,24 +218,82 @@ const EditProfileForm = () => {
 
   //아이디 인풋 바뀌었을 때
   const handleChangeId = (e) => {
-    setInputId(e.target.value);
+    const inputValue = e.target.value;
+    setInputId(inputValue);
     setCheckId(false);
-    if(inputId.length > 20) {
+    if(inputValue.length > 20) {
       setIdErrorMessage("아이디는 20자 이하로 입력해주세요.");
+    }
+    else if(inputValue.includes(" ")) {
+      setIdErrorMessage("아이디에 공백이 포함되어 있습니다.");
     }
     else {
       setIdErrorMessage("");
     }
-  };
+};
 
   //이름 인풋 바뀌었을 때
   const handleChangeName = (e) => {
-    setInputName(e.target.value);
-    if(inputName.length > 10) {
+    const inputValue = e.target.value;
+    setInputName(inputValue);
+    if(inputValue.length > 10) {
       setNameErrorMessage("이름은 10자 이하로 입력해주세요.");
+    }
+    else if(inputValue.includes(" ")) {
+      setNameErrorMessage("이름에 공백이 포함되어 있습니다.");
     }
     else {
       setNameErrorMessage("");
+    }
+  };
+
+  //비밀번호 인풋 바뀌었을 때
+  const handleChangePw = (e) => {
+    const inputValue = e.target.value;
+    setInputPw(inputValue);
+    if(inputValue.length > 15) {
+      setCurrentPwErrorMessage("비밀번호는 15자 이하로 입력해주세요.");
+    }
+    else if(inputValue.includes(" ")) {
+      setCurrentPwErrorMessage("비밀번호에 공백이 포함되어 있습니다.");
+    }
+    else {
+      setCurrentPwErrorMessage("");
+    }
+  };
+
+  const handleChangeNewPw = (e) => {
+    const inputValue = e.target.value;
+    setInputNewPw(inputValue);
+    if(inputValue.length > 15) {
+      setNewPwErrorMessage("비밀번호는 15자 이하로 입력해주세요.");
+    }
+    else if(inputValue.includes(" ")) {
+      setNewPwErrorMessage("비밀번호에 공백이 포함되어 있습니다.");
+    }
+    else if(inputValue !== inputConfirmPw && !inputConfirmPw) {
+      setConfirmPwErrorMessage("비밀번호가 일치하지 않습니다.");
+    }
+    else {
+      setNewPwErrorMessage("");
+      setConfirmPwErrorMessage("");
+    }
+  };
+
+  const handleChangeConfirmPw = (e) => {
+    const inputValue = e.target.value;
+    setInputConfirmPw(inputValue);
+    if(inputValue.length > 15) {
+      setConfirmPwErrorMessage("비밀번호는 15자 이하로 입력해주세요.");
+    }
+    else if(inputValue.includes(" ")) {
+      setConfirmPwErrorMessage("비밀번호에 공백이 포함되어 있습니다.");
+    }
+    else if(inputValue !== inputNewPw) {
+      setConfirmPwErrorMessage("비밀번호가 일치하지 않습니다.");
+    }
+    else {
+      setConfirmPwErrorMessage("");
     }
   };
 
@@ -272,16 +333,25 @@ const EditProfileForm = () => {
 
   //비밀번호 수정 모달 확인 버튼 클릭 시
   const handleModalConfirm = async () => {
-    closeModal();
-
+    if (inputPw.length > 15 || inputNewPw.length > 15 || inputConfirmPw.length > 15) {
+      return;
+    }
+  
+    if (inputNewPw !== inputConfirmPw) {
+      setPwErrorMessage("새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+      return;
+    }
+  
     try {
       const response = await axios.post('http://localhost:8282/use/checkPw', { 
-        pw: currentPassword,
-        newPw: newPassword,
-        confirmPw: confirmPassword
+        id: userId,
+        pw: inputPw,
+        newPw: inputNewPw,
+        confirmPw: inputConfirmPw
       });
       console.log(response.data.message);
       setPwErrorMessage(response.data.message);
+      closeModal();
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         setPwErrorMessage(error.response.data.error);
@@ -335,20 +405,24 @@ const EditProfileForm = () => {
           <ModalContent>
             <FormGroup>
               <Label htmlFor="current-password">현재 비밀번호</Label>
-              <Input type="password" id="current-password" name="current-password" onChange={(e) => setCurrentPassword(e.target.value)} />
+              <Input type="password" id="current-password" name="current-password" onChange={handleChangePw} />
             </FormGroup>
+            {currentPwErrorMessage && <ErrorMessage>{currentPwErrorMessage}</ErrorMessage>}
             <FormGroup>
               <Label htmlFor="new-password">새 비밀번호</Label>
-              <Input type="password" id="new-password" name="new-password" onChange={(e) => setNewPassword(e.target.value)} />
+              <Input type="password" id="new-password" name="new-password" onChange={handleChangeNewPw} />
             </FormGroup>
+            {newPwErrorMessage && <ErrorMessage>{newPwErrorMessage}</ErrorMessage>}
             <FormGroup>
               <Label htmlFor="confirm-password">새 비밀번호 확인</Label>
-              <Input type="password" id="confirm-password" name="confirm-password" onChange={(e) => setConfirmPassword(e.target.value)} />
+              <Input type="password" id="confirm-password" name="confirm-password" onChange={handleChangeConfirmPw} />
             </FormGroup>
+            {confirmPwErrorMessage && <ErrorMessage>{confirmPwErrorMessage}</ErrorMessage>}
             <FormGroup>
               <CancelButton type="button" onClick={closeModal}>취소</CancelButton> 
               <SubmitButton type="button" onClick={handleModalConfirm}>확인</SubmitButton> 
             </FormGroup>
+            {pwErrorMessage && <ErrorMessage>{pwErrorMessage}</ErrorMessage>}
           </ModalContent>
         </Modal>
       )}
