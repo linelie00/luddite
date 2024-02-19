@@ -164,12 +164,17 @@ const ModalContent = styled.div`
 
 const EditProfileForm = () => {
   const { isLoggedIn, setUserId, userId, setUserName, userName } = useAuth();
-  const [idErrorMessage, setIdErrorMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [idErrorMessage, setIdErrorMessage] = useState("");
+  const [nameErrorMessage, setNameErrorMessage] = useState("");
+  const [pwErrorMessage, setPwErrorMessage] = useState("");
   const [inputId, setInputId] = useState(userId);
-  const [checkId, setCheckId] = useState(false);
   const [inputName, setInputName] = useState(userName);
-  const [pw, setPw] = useState("");
+  const [inputPw, setInputPw] = useState("");
+  const [checkId, setCheckId] = useState(true);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
   useEffect(() => {
@@ -212,13 +217,34 @@ const EditProfileForm = () => {
   const handleChangeId = (e) => {
     setInputId(e.target.value);
     setCheckId(false);
+    if(inputId.length > 20) {
+      setIdErrorMessage("아이디는 20자 이하로 입력해주세요.");
+    }
+    else {
+      setIdErrorMessage("");
+    }
+  };
+
+  //이름 인풋 바뀌었을 때
+  const handleChangeName = (e) => {
+    setInputName(e.target.value);
+    if(inputName.length > 10) {
+      setNameErrorMessage("이름은 10자 이하로 입력해주세요.");
+    }
+    else {
+      setNameErrorMessage("");
+    }
   };
 
   //아이디 중복체크 버튼 클릭 시
   const handleCheckId = async () => {
     if (inputId === userId) {
-      setIdErrorMessage("현재 아이디와 같습니다.");
+      setIdErrorMessage("현재 아이디와 동일합니다.");
       setCheckId(true);
+      return;
+    }
+
+    if (inputId.length > 20) {
       return;
     }
 
@@ -244,8 +270,25 @@ const EditProfileForm = () => {
     setIsModalOpen(false);
   };
 
-  const handleModalConfirm = () => {
-    closeModal(); 
+  //비밀번호 수정 모달 확인 버튼 클릭 시
+  const handleModalConfirm = async () => {
+    closeModal();
+
+    try {
+      const response = await axios.post('http://localhost:8282/use/checkPw', { 
+        pw: currentPassword,
+        newPw: newPassword,
+        confirmPw: confirmPassword
+      });
+      console.log(response.data.message);
+      setPwErrorMessage(response.data.message);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setPwErrorMessage(error.response.data.error);
+      } else {
+        setPwErrorMessage("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      }
+    }
   };
 
   return (
@@ -259,9 +302,10 @@ const EditProfileForm = () => {
           <FormGroup>
             <Label htmlFor="username">이름</Label>
             <InputGroup>
-              <Input type="text" id="user_name" name="user_name" value={inputName} onChange={(e) => setInputName(e.target.value)}/>
+              <Input type="text" id="user_name" name="user_name" value={inputName} onChange={handleChangeName}/>
             </InputGroup>
           </FormGroup>
+          {nameErrorMessage && <ErrorMessage>{nameErrorMessage}</ErrorMessage>}
           <Divider />
           <FormGroup>
             <Label htmlFor="userid">아이디</Label>
@@ -291,15 +335,15 @@ const EditProfileForm = () => {
           <ModalContent>
             <FormGroup>
               <Label htmlFor="current-password">현재 비밀번호</Label>
-              <Input type="password" id="current-password" name="current-password" />
+              <Input type="password" id="current-password" name="current-password" onChange={(e) => setCurrentPassword(e.target.value)} />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="new-password">새 비밀번호</Label>
-              <Input type="password" id="new-password" name="new-password" />
+              <Input type="password" id="new-password" name="new-password" onChange={(e) => setNewPassword(e.target.value)} />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="confirm-password">새 비밀번호 확인</Label>
-              <Input type="password" id="confirm-password" name="confirm-password" />
+              <Input type="password" id="confirm-password" name="confirm-password" onChange={(e) => setConfirmPassword(e.target.value)} />
             </FormGroup>
             <FormGroup>
               <CancelButton type="button" onClick={closeModal}>취소</CancelButton> 
