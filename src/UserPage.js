@@ -350,7 +350,13 @@ const EditProfileForm = () => {
         confirmPw: inputConfirmPw
       });
       console.log(response.data.message);
-      setPwErrorMessage(response.data.message);
+      setPwErrorMessage('');
+      // 성공 알림 표시
+      alert('비밀번호가 성공적으로 변경되었습니다.');
+      // 비밀번호 입력 필드 초기화
+      setInputPw('');
+      setInputNewPw('');
+      setInputConfirmPw('');
       closeModal();
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
