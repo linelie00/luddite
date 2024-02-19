@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider';
 import { HeaderIcon } from './StyledComponents';
 import styled from 'styled-components';
+import { set } from 'lodash';
 
 const UserContainer = styled.div`
   display: flex;
@@ -165,8 +166,9 @@ const EditProfileForm = () => {
   const { isLoggedIn, setUserId, userId, setUserName, userName } = useAuth();
   const [idErrorMessage, setIdErrorMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputId, setInputId] = useState(userId); 
-  const [inputName, setInputName] = useState(userName); 
+  const [inputId, setInputId] = useState(userId);
+  const [checkId, setCheckId] = useState(false);
+  const [inputName, setInputName] = useState(userName);
   const [pw, setPw] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
@@ -205,9 +207,18 @@ const EditProfileForm = () => {
     }
   };
 
+
+  //아이디 인풋 바뀌었을 때
+  const handleChangeId = (e) => {
+    setInputId(e.target.value);
+    setCheckId(false);
+  };
+
+  //아이디 중복체크 버튼 클릭 시
   const handleCheckId = async () => {
     if (inputId === userId) {
       setIdErrorMessage("현재 아이디와 같습니다.");
+      setCheckId(true);
       return;
     }
 
@@ -215,8 +226,7 @@ const EditProfileForm = () => {
       const response = await axios.post('http://localhost:8282/use/checkId', { id: inputId });
       console.log(response.data.message);
       setIdErrorMessage(response.data.message);
-
-      setInputId(inputId);
+      setCheckId(true);
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         setIdErrorMessage(error.response.data.error);
@@ -256,7 +266,7 @@ const EditProfileForm = () => {
           <FormGroup>
             <Label htmlFor="userid">아이디</Label>
             <InputGroup>
-              <Input type="text" id="id" name="id" value={inputId} onChange={(e) => setInputId(e.target.value)}/>
+              <Input type="text" id="id" name="id" value={inputId} onChange={handleChangeId}/>
               <IdButton type="button" onClick={handleCheckId}>아이디 중복 체크</IdButton> 
             </InputGroup>
           </FormGroup>
