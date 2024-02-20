@@ -28,6 +28,7 @@ const FormGroup = styled.div`
   align-items: center;
   margin-top: 15px;
   text-align: right;
+  float: center;
 `;
 
 const Group = styled.div`
@@ -142,7 +143,7 @@ const CheckErrorMessage = styled.div`
     text-align: center;
 `;
 
-export const Divider = styled.div`
+const Divider = styled.div`
   margin: 20px 0;
   border-top: 1px solid #ccc;
 `;
@@ -172,17 +173,24 @@ const ModalContent = styled.div`
   text-align: right;
 `;
 
-export const UserLink = styled(Link)`
+const UserLink = styled(Link)`
   display: block;
   text-align: right;
   margin-top: 20px;
   text-decoration: none;
   font-size: 14px;
   color: #864971;
+  margin-left: 10px;
 
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const LinkContainer = styled.div`
+  display: flex;
+  //justify-content: space-between;
+  float: right;
 `;
 
 
@@ -202,7 +210,7 @@ const EditProfileForm = () => {
   const [inputConfirmPw, setInputConfirmPw] = useState("");
   const [checkId, setCheckId] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false); 
-  const { updateUserName, updateUserId } = useAuth();
+  const { updateUserName, updateUserId, logout } = useAuth();
 
   useEffect(() => {
     fetchUserInfo();
@@ -392,6 +400,10 @@ const EditProfileForm = () => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <UserContainer>
       <Link to="/">
@@ -428,7 +440,10 @@ const EditProfileForm = () => {
             <SubmitButton type="button" onClick={handleSubmit}>회원정보 수정</SubmitButton>
         </Group>
         {errorMessage && <CheckErrorMessage>{errorMessage}</CheckErrorMessage>}
-        <UserLink to="/login">탈퇴하기</UserLink>
+        <LinkContainer>
+          <UserLink to="/" onClick={handleLogout}>로그아웃</UserLink>
+          <UserLink to="/login">계정 삭제</UserLink>
+        </LinkContainer>
       </UserFormContainer>
       
      
