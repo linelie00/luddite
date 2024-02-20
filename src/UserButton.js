@@ -1,4 +1,3 @@
-// UserButton.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import userIcon from './userIcon.svg';
@@ -9,6 +8,7 @@ const ButtonContainer = styled.div`
   left: 95%;
   top: 20px;
   position: absolute;
+  z-index: 30;
 
   @media screen and (max-width: 1000px) {
     left: 94%;
@@ -32,55 +32,84 @@ const TabsContainer = styled.div`
   position: absolute;
   top: calc(100% + 5px);
   right: 0;
-  display: ${(props) => (props.isVisible ? 'block' : 'none')};
-  width: 120px;
-  background-color: #ffffff;
+  display: ${(props) => (props.isVisible ? 'flex' : 'none')}; 
+  flex-direction: column;
+  min-width: 120px;
+  background-color: #fff;
   border-radius: 3px;
-  //box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
   border: 3px solid #864971;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+`;
+
+const UserContainer = styled.div`
+  position: relative; /* 상대 위치 지정 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+  //background-color: #e9e9e9;
+  padding: 5px 8px 5px 8px;
+  //border-radius: 5px;
+  
+  /* 회색 선 스타일 */
+  &::after {
+    content: '';
+    position: absolute; /* 절대 위치 지정 */
+    bottom: 0; /* 아래쪽에 배치 */
+    center: 0; /* 왼쪽에 배치 */
+    width: 80%; /* 가로폭을 100%로 설정하여 컨테이너의 가로폭과 동일하게 */
+    height: 2px; /* 선의 높이 설정 */
+    background-color: #864971; /* 회색 배경색 설정 */
+    border-radius: 2px; /* 둥근 테두리 설정 */
+    content: ''; /* 가상 요소에 내용 없음 */
+  }
+`;
+
+const UserName = styled.span`
+  font-size: 18px;
+  color: #864971;
+  font-weight: bold;
+  white-space: nowrap;
+`;
+
+const UserId = styled.span`
+  font-size: 14px;
+  color: #B89DAF;
 `;
 
 const Tab = styled(Link)`
   display: block;
-  padding: 5px 0; /* Adjust padding */
-  text-align: right; /* Right align text */
+  text-align: right;
   color: #864971;
   text-decoration: none;
   cursor: pointer;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 3px;
+  padding: 5px 10px;
   font-size: 14px;
   font-weight: 600;
   &:hover {
-    background-color: #F2F2F2;
+    background-color: #e9e9e9;
     color: #864971;
   }
 `;
 
 const LogoutButton = styled.span`
   display: block;
-  padding: 5px 0;
   text-align: right;
   color: #864971;
   text-decoration: none;
   cursor: pointer;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 3px;
+  padding: 5px 10px;
   font-size: 14px;
   font-weight: 600;
   &:hover {
-    background-color: #F2F2F2;
+    background-color: #e9e9e9;
     color: #864971;
   }
 `;
 
 const UserButton = ({ onLogout }) => {
   const [popupVisible, setPopupVisible] = useState(false);
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, userId, userName } = useAuth();
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible);
@@ -92,7 +121,11 @@ const UserButton = ({ onLogout }) => {
       <TabsContainer isVisible={popupVisible}>
         {isLoggedIn ? (
           <>
-            <Tab to="/user">프로필</Tab>
+            <UserContainer>
+              <UserName>{userName}</UserName>
+              <UserId>@{userId}</UserId>
+            </UserContainer>
+            <Tab to="/user">수정</Tab>
             <LogoutButton onClick={() => { logout(); onLogout(); }}>로그아웃</LogoutButton>
           </>
         ) : (

@@ -5,6 +5,7 @@ import MainPage from './MainPage';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
 import UserPage from './UserPage';
+import DeleteUserPage from './DeleteUserPage';
 import { AuthProvider } from './AuthProvider';
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage />}/>
             <Route path="/signup" element={<SignUpPage />}/>
             <Route path="/user" element={<UserPage />}/>
+            <Route path="/deleteUser" element={<DeleteUserPage />}/>
             {/* 다른 라우트들 추가 */}
           </Routes>
         </AuthProvider>
