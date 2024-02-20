@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider';
 import { HeaderIcon } from './StyledComponents';
 import styled from 'styled-components';
-import { set } from 'lodash';
 
 const UserContainer = styled.div`
   display: flex;
@@ -442,7 +441,7 @@ const EditProfileForm = () => {
         {errorMessage && <CheckErrorMessage>{errorMessage}</CheckErrorMessage>}
         <LinkContainer>
           <UserLink to="/" onClick={handleLogout}>로그아웃</UserLink>
-          <UserLink to="/login">계정 삭제</UserLink>
+          <UserLink to="/deleteUser">탈퇴하기</UserLink>
         </LinkContainer>
       </UserFormContainer>
       
