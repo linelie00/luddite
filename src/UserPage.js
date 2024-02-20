@@ -20,13 +20,14 @@ const UserFormContainer = styled.div`
   //border: 1px solid #ccc;
   border-radius: 5px;
   //margin-top: 10px;
-  text-align: right;
+  //text-align: center;
 `;
 
 const FormGroup = styled.div`
   display: flex;
   align-items: center;
   margin-top: 15px;
+  text-align: right;
 `;
 
 const Group = styled.div`
@@ -131,6 +132,14 @@ const ErrorMessage = styled.div`
     color: red;
     margin-top: 10px;
     font-size: 14px;
+    text-align: right;
+`;
+
+const CheckErrorMessage = styled.div`
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
 `;
 
 export const Divider = styled.div`
@@ -163,13 +172,22 @@ const ModalContent = styled.div`
   text-align: right;
 `;
 
-const Err = styled.div`
-  text-align: center;
+export const UserLink = styled(Link)`
+  display: block;
+  text-align: right;
+  margin-top: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #864971;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 
 const EditProfileForm = () => {
-  const { isLoggedIn, setUserId, userId, setUserName, userName } = useAuth();
+  const { isLoggedIn, userId, userName } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const [idErrorMessage, setIdErrorMessage] = useState("");
   const [nameErrorMessage, setNameErrorMessage] = useState("");
@@ -409,9 +427,11 @@ const EditProfileForm = () => {
             <CancelButton type="button">취소</CancelButton>
             <SubmitButton type="button" onClick={handleSubmit}>회원정보 수정</SubmitButton>
         </Group>
+        {errorMessage && <CheckErrorMessage>{errorMessage}</CheckErrorMessage>}
+        <UserLink to="/login">탈퇴하기</UserLink>
       </UserFormContainer>
       
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+     
       {isModalOpen && (
         <Modal>
           <ModalContent>
@@ -434,9 +454,7 @@ const EditProfileForm = () => {
               <CancelButton type="button" onClick={closeModal}>취소</CancelButton> 
               <SubmitButton type="button" onClick={handleModalConfirm}>확인</SubmitButton> 
             </Group>
-            <Err>
-              {pwErrorMessage && <ErrorMessage>{pwErrorMessage}</ErrorMessage>}
-            </Err>
+              {pwErrorMessage && <CheckErrorMessage>{pwErrorMessage}</CheckErrorMessage>}
           </ModalContent>
         </Modal>
       )}
