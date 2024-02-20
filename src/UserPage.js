@@ -32,9 +32,9 @@ const FormGroup = styled.div`
 const Group = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
-  margin-top: 50px;
-  width: 600px;
+  //margin-bottom: 10px;
+  margin-top:60px;
+  //width: 600px;
   //padding: 20px;
 `;
 
@@ -159,7 +159,12 @@ const ModalContent = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 100%;
+  align-items: center;
   text-align: right;
+`;
+
+const Err = styled.div`
+  text-align: center;
 `;
 
 
@@ -179,6 +184,7 @@ const EditProfileForm = () => {
   const [inputConfirmPw, setInputConfirmPw] = useState("");
   const [checkId, setCheckId] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false); 
+  const { updateUserName, updateUserId } = useAuth();
 
   useEffect(() => {
     fetchUserInfo();
@@ -188,32 +194,33 @@ const EditProfileForm = () => {
     // 회원정보를 불러오는 비동기 함수
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrorMessage("");
-    const formData = new FormData(event.target);
-    const id = formData.get('id');
-    const userName = formData.get('user_name');
-    const pw = formData.get('pw');
 
+  const handleSubmit = async () => {
     try {
-      const response = await axios.put('http://localhost:8282/use/update', {
-        id,
-        userName,
-        pw
+      const response = await axios.post('http://localhost:8282/use/editProfile', {
+        old_id: userId,
+        user_name: inputName,
+        id: inputId,
+        checkId
       });
-      if (isLoggedIn(true) && response.status === 200) {
-        console.log('회원정보 수정 성공');
-      }
+      // 서버에서 반환한 메시지를 설정
+      setErrorMessage(response.data.message);
+      console.log(response.data.message, inputId, inputName, checkId);
+      updateUserName(inputName);
+      updateUserId(inputId);
     } catch (error) {
       console.log('회원정보 수정 실패');
       if (error.response && error.response.data && error.response.data.error) {
+        // 서버에서 반환한 오류 메시지를 설정
         setErrorMessage(error.response.data.error);
       } else {
+        // 기타 오류 처리
         setErrorMessage("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
       }
     }
   };
+  
+
 
 
   //아이디 인풋 바뀌었을 때
@@ -373,7 +380,6 @@ const EditProfileForm = () => {
         <HeaderIcon />
       </Link>
       <UserFormContainer>
-        <form onSubmit={handleSubmit}>
           <Divider />
           <FormGroup>
             <Label htmlFor="username">이름</Label>
@@ -399,12 +405,12 @@ const EditProfileForm = () => {
             </InputGroup>
           </FormGroup>
           <Divider />
-        </form>
+          <Group>
+            <CancelButton type="button">취소</CancelButton>
+            <SubmitButton type="button" onClick={handleSubmit}>회원정보 수정</SubmitButton>
+        </Group>
       </UserFormContainer>
-      <Group>
-        <CancelButton type="button">취소</CancelButton>
-        <SubmitButton type="submit">회원정보 수정</SubmitButton>
-      </Group>
+      
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {isModalOpen && (
         <Modal>
@@ -424,11 +430,13 @@ const EditProfileForm = () => {
               <Input type="password" id="confirm-password" name="confirm-password" onChange={handleChangeConfirmPw} />
             </FormGroup>
             {confirmPwErrorMessage && <ErrorMessage>{confirmPwErrorMessage}</ErrorMessage>}
-            <FormGroup>
+            <Group>
               <CancelButton type="button" onClick={closeModal}>취소</CancelButton> 
               <SubmitButton type="button" onClick={handleModalConfirm}>확인</SubmitButton> 
-            </FormGroup>
-            {pwErrorMessage && <ErrorMessage>{pwErrorMessage}</ErrorMessage>}
+            </Group>
+            <Err>
+              {pwErrorMessage && <ErrorMessage>{pwErrorMessage}</ErrorMessage>}
+            </Err>
           </ModalContent>
         </Modal>
       )}

@@ -125,7 +125,7 @@ const UserButton = ({ onLogout }) => {
               <UserName>{userName}</UserName>
               <UserId>@{userId}</UserId>
             </UserContainer>
-            <Tab to="/user">프로필</Tab>
+            <Tab to="/user">정보 수정</Tab>
             <LogoutButton onClick={() => { logout(); onLogout(); }}>로그아웃</LogoutButton>
           </>
         ) : (

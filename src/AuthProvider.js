@@ -21,8 +21,16 @@ export const AuthProvider = ({ children }) => {
     setUserName(null);
   };
 
+  const updateUserName = (userName) => {
+    setUserName(userName);
+  };
+
+  const updateUserId = (userId) => {
+    setUserId(userId);
+  }
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userId, userName, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, userId, setUserId, userName, setUserName, login, logout, updateUserName, updateUserId }}>
       {children}
     </AuthContext.Provider>
   );
