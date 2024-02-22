@@ -222,7 +222,7 @@ const EditProfileForm = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8282/use/editProfile', {
+      const response = await axios.post('http://43.200.49.227:8282/use/editProfile', {
         old_id: userId,
         user_name: inputName,
         id: inputId,
@@ -342,7 +342,7 @@ const EditProfileForm = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8282/use/checkId', { id: inputId });
+      const response = await axios.post('http://43.200.49.227:8282/use/checkId', { id: inputId });
       console.log(response.data.message);
       setIdErrorMessage(response.data.message);
       setCheckId(true);
@@ -375,7 +375,7 @@ const EditProfileForm = () => {
     }
   
     try {
-      const response = await axios.post('http://localhost:8282/use/checkPw', { 
+      const response = await axios.post('http://43.200.49.227:8282/use/checkPw', { 
         id: userId,
         pw: inputPw,
         newPw: inputNewPw,

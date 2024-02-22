@@ -58,7 +58,7 @@ const MainPage = () => {
   const updateBookmarksToBackend = async (userId, bookmarksArray) => {
     try {
       // 백엔드로 요청할 엔드포인트와 데이터 설정
-      const endpoint = `http://localhost:8282/use/updateBookmarks`;
+      const endpoint = `http://43.200.49.227:8282/use/updateBookmarks`;
       const requestData = {
         id: userId,
         bookmarks: bookmarksArray,

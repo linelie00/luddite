@@ -121,7 +121,7 @@ const DeleteProfileForm = () => {
     const formData = new FormData(event.target);
     const pw = formData.get('pw');
     try {
-        const response = await axios.post('http://localhost:8282/use/deleteUser', {
+        const response = await axios.post('http://43.200.49.227:8282/use/deleteUser', {
           id: userId,
           pw
         });

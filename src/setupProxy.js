@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.use(
     '/use', // 프록시할 API 경로 설정
     createProxyMiddleware({
-      target: 'http://43.200.49.227:8282/', // 프록시 대상 주소
+      target: 'http://43.200.49.227:8282', // 프록시 대상 주소
       changeOrigin: true,
     })
   );
