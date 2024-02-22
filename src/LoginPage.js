@@ -18,7 +18,7 @@ const LoginForm = () => {
         const pw = formData.get('pw');
 
         try {
-            const response = await axios.post('http://localhost:8282/use/login', {
+            const response = await axios.post('http://http://43.200.49.227:8282/use/login', {
                 id,
                 pw
             });
