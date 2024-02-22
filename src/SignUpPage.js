@@ -50,13 +50,13 @@ const SignUpForm = () => {
       </Link>
       <UserFormContainer>
         <form onSubmit={handleSubmit}>
+        <FormGroup>
+            <Label htmlFor="username">아이디:</Label>
+            <Input type="text" id="id" name="id" placeholder="아이디를 입력하세요" />
+          </FormGroup>
           <FormGroup>
             <Label htmlFor="name">이름:</Label>
             <Input type="text" id="user_name" name="user_name" placeholder="이름을 입력하세요" />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="username">아이디:</Label>
-            <Input type="text" id="id" name="id" placeholder="아이디를 입력하세요" />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="password">비밀번호:</Label>
