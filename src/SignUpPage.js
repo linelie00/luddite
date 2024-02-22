@@ -24,7 +24,7 @@ const SignUpForm = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8282/use/signup', {
+      const response = await axios.post('http://43.200.49.227:8282/use/signup', {
         user_name,
         id,
         pw
