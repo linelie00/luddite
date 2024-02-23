@@ -35,7 +35,7 @@ const useSearch = ({ method }) => {
           .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`)
           .join('&');
 
-        const url = `http://ludditepupple:3000/api/search?${queryString}`;
+        const url = `http://43.200.49.227:8282/api/search?${queryString}`;
 
         console.log(`API 호출 URL: ${url}`);
 
