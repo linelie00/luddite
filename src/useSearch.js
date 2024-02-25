@@ -41,11 +41,14 @@ const useSearch = ({ method }) => {
 
         const response = await axios.get(url);
 
+        console.log('호출된 데이터:', response.data);
+
         setSearchResult((prevResult) => ({
           ...prevResult,
           [pos === 1 ? 'pos1' : 'pos27']: response.data,
         }));
         console.log(`호출에 성공했습니다. (pos: ${pos}, word: ${searchValue})`);
+        console.log('호출된 데이터2:', response.data);
       } catch (error) {
         console.error(`데이터를 불러오는 중 에러 발생 (pos: ${pos}):`, error);
         setSearchResult((prevResult) => ({
